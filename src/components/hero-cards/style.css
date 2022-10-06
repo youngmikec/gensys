@@ -1,0 +1,27 @@
+.wrapper1 {
+    background-image: url('../../assets/images/Welcome.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    min-height: 500px;
+    margin-bottom: 1rem;
+}
+.wrapper2 {
+    background-image: url('../../assets/images/Welcome2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    min-height: 500px;
+    margin-bottom: 1rem;
+}
+.wrapper3 {
+    background-image: url('../../assets/images/Welcome3.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    min-height: 500px;
+    margin-bottom: 1rem;
+}

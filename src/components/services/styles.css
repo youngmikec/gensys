@@ -1,0 +1,4 @@
+.service-card img {
+    transform: rotate(180deg);
+    transition: all;
+}
