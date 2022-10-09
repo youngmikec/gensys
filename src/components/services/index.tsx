@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 //icons
 import haticon from '../../assets/images/hat.png';
@@ -21,39 +22,45 @@ const Services = () => {
 
                 <div className="grid grid-cols-1 space-x-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
                     <div>
-                        <div className="text-center rounded-lg hover:shadow-lg transition-all p-4">
-                            <div className='flex justify-center'>
-                                <img src={haticon} alt="hat-icon" width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
+                        <Link to="/services">
+                            <div className="text-center rounded-lg hover:shadow-lg transition-all p-4">
+                                <div className='flex justify-center'>
+                                    <img src={haticon} alt="hat-icon" width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
+                                </div>
+                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Sell Cryptos</h3>
+                                <p className='text-[#0F2137]'>
+                                    Get the best value for your Bitcoin, we give you the most reliable platform to exchange your Bitcoins in whatever volume for cash in local currency.
+                                </p>
                             </div>
-                            <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Sell Cryptos</h3>
-                            <p className='text-[#0F2137]'>
-                                Get the best value for your Bitcoin, we give you the most reliable platform to exchange your Bitcoins in whatever volume for cash in local currency.
-                            </p>
-                        </div>
+                        </Link>
                     </div>
 
                     <div>
-                        <div className="text-center rounded-lg hover:shadow-lg transition-all p-4">
-                            <div className='flex justify-center'>
-                                <img src={penicon} alt="pen-icon"  width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
-                            </div>
-                            <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Sell Giftcards</h3>
-                            <p className='text-[#0F2137]'>
-                                Sell your iTunes, google play, stream, vanilla and all forms of gift cards easily without stress, receiving your exchange naira value in no time!
-                            </p>
-                        </div>
+                        <Link to="/services">
+                            <div className="text-center rounded-lg hover:shadow-lg transition-all p-4">
+                                <div className='flex justify-center'>
+                                    <img src={penicon} alt="pen-icon"  width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
+                                </div>
+                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Sell Giftcards</h3>
+                                <p className='text-[#0F2137]'>
+                                    Sell your iTunes, google play, stream, vanilla and all forms of gift cards easily without stress, receiving your exchange naira value in no time!
+                                </p>
+                            </div>  
+                        </Link>
                     </div>
 
                     <div>
-                        <div className="text-center rounded-lg hover:shadow-lg transition-all p-4">
-                            <div className="flex justify-center">
-                                <img src={clockicon} alt="clock-icon"  width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
+                        <Link to="/services">
+                            <div className="text-center rounded-lg hover:shadow-lg transition-all p-4">
+                                <div className="flex justify-center">
+                                    <img src={clockicon} alt="clock-icon"  width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
+                                </div>
+                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Selling of Gadgets</h3>
+                                <p className='text-[#0F2137]'>
+                                    Look no further, you indeed got to the right place to have your Bitcoin and Gift cards exchange into Cash immediately, just like that!
+                                </p>
                             </div>
-                            <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Selling of Gadgets</h3>
-                            <p className='text-[#0F2137]'>
-                                Look no further, you indeed got to the right place to have your Bitcoin and Gift cards exchange into Cash immediately, just like that!
-                            </p>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

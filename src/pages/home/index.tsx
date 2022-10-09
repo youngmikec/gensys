@@ -13,7 +13,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 // components
-import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
 import WhatsappButton from '../../components/whatsapp-btn';
 import HeroCardOne from '../../components/hero-cards/hero-card-one';
@@ -21,6 +20,7 @@ import HeroCardTwo from '../../components/hero-cards/hero-card-two';
 import HeroCardThree from '../../components/hero-cards/hero-card-three';
 import { whatsAppUrl } from '../../constant';
 import Services from '../../components/services';
+import Navbar from '../../components/navbar';
 
 const Home = () => {
   return (

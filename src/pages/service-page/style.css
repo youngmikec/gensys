@@ -1,0 +1,21 @@
+.crypto-wrapper {
+    background-image: url('../../assets/images/crypto.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20rem;
+}
+.gift-wrapper {
+    background-image: url('../../assets/images/gift.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20rem;
+}
+.stock-wrapper {
+    background-image: url('../../assets/images/reliable.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20rem;
+}
