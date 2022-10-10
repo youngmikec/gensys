@@ -8,11 +8,12 @@ const HeroCardOne = () => {
     <>
         <div className='w-full wrapper1'>
             <div className='text-white w-4/12 ml-28 mr-auto py-10'>
+                <p>Odogwu rates</p>
                 <h1 className='text-6xl font-bold mb-4'>The Best Market Value ON The Go</h1>
-                <p>Buy and Sell crypto with the best exchanger</p>
+                <p>Buy and Sell crypto with the most reliable exchanger.</p>
 
                 <button className='py-3 px-8 text-white bg-[#1b1b1b] rounded-3xl my-4 hover:bg-white hover:text-black'>
-                    <a href={whatsAppUrl} target="_blank" rel='noreferrer' >Buy now</a>
+                    <a href={whatsAppUrl} target="_blank" rel='noreferrer' >Buy and sell now</a>
                 </button>
             </div>
             {/* <div style={{width: "100%", height: 0, paddingBottom: '100%', position: 'relative'}}>

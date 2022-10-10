@@ -28,7 +28,7 @@ const CryptoRate = () => {
             <div className="bg-gray-100 border-2 border-gray-100 rounded-xl py-6 px-6">
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
                     <div>
-                        <p>Amount</p>
+                        <p className='text-sm font-bold'>Amount</p>
                         <input 
                             type="number"
                             value={usdQty}
@@ -39,12 +39,14 @@ const CryptoRate = () => {
                             className="my-4 rounded-lg bg-white text-black py-2 px-4"
                         />
                     </div>
+
                     <div>
-                        <p>Select Currency</p>
+                        <p className='text-sm font-bold'>Select Currency</p>
                         <input type="text" defaultValue="USD" value="USD" readOnly className="my-4 rounded-lg bg-white text-black py-2 px-4" />
                     </div>
+
                     <div>
-                        <p>To</p>
+                        <p className='text-sm font-bold'>To</p>
                         <input 
                             type="number"
                             value={cryptoQty}
@@ -52,16 +54,17 @@ const CryptoRate = () => {
                                 converUsd2NGN(usdQty)
                             } }
                             disabled
-                            className="rounded-lg bg-white text-black py-2 px-4" />
+                            className="my-4 rounded-lg bg-white text-black py-2 px-4" />
                     </div>
+
                     <div>
-                        <p>Select Cryptocurrency</p>
+                        <p className='text-sm font-bold'>Select Cryptocurrency</p>
                         <select 
                             name="crypto" 
                             id="crypto"
                             value={crypto}
                             onChange={(e) => setCrypto(e.target.value)}
-                            className="rounded-lg bg-white text-black py-2 px-4 w-full"
+                            className="my-4 rounded-lg bg-white text-black py-2 px-4 w-full"
                         >
                             <option value="BTC">BTC</option>
                             <option value="USDT">USDT</option>

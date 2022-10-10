@@ -4,12 +4,12 @@ import { AiOutlineInstagram } from 'react-icons/ai';
 import { FaFacebookF } from 'react-icons/fa';
 import { BsTwitter } from 'react-icons/bs';
 
-import logo from '../../assets/images/logo-orange.png';
+import logo from '../../assets/images/logo-redesign.jpeg';
 
 const Footer = () => {
   return (
     <>
-        <div className='bg-[#1b1b1b] text-white w-full py-9 mb-0'>
+        <div className='bg-black text-white w-full py-9 mb-0'>
             <div className='w-8/12 mx-auto'>
                 <div className="mx-auto grid grid-cols-1 
                     sm:grid-cols-2 

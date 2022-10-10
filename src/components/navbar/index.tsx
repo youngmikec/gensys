@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/images/logo-orange.png';
+import logo from '../../assets/images/logo-redesign.jpeg';
 
 type Props = {
   bg?: string;
@@ -10,10 +10,10 @@ type Props = {
 const Navbar = ({bg, text}: Props) => {
   return (
     <>
-      <div className='bg-[#1b1b1b] w-full'>
+      <div className='bg-black w-full'>
         <div className={`mx-auto w-10/12 flex justify-between`}>
           <div>
-            <img src={logo} alt="logo" width="80rem" height="80rem" />
+            <img src={logo} alt="logo" width="100rem" height="100rem" />
           </div>
           <div className='pt-4'>
             <ul className='list-none'>
