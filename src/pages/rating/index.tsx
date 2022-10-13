@@ -10,7 +10,7 @@ const Rating = () => {
     return (
         <>
             <Navbar bg='#000000' text='#ffffff' />
-            <div className='mx-auto w-10/12'> 
+            <div className='mx-auto md:w-11/12 lg:w-10/12'> 
                 <div className="text-left">
                     <h3 className='text-2xl font-bold mt-8 mb-4'>Rating Calculator</h3>
                     <p className=''>Experience the best available.</p>

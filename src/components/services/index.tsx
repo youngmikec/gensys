@@ -27,9 +27,9 @@ const Services = () => {
                                 <div className='flex justify-center'>
                                     <img src={haticon} alt="hat-icon" width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
                                 </div>
-                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Sell Cryptos</h3>
+                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Crypto Exchanger</h3>
                                 <p className='text-[#0F2137]'>
-                                    Get the best value for your Bitcoin, we give you the most reliable platform to exchange your Bitcoins in whatever volume for cash in local currency.
+                                    Get the best value for your Bitcoin, Etheruem, XRP, USDT and many more. We give you the most seamless exchange in whatever volume for cash in local currency.                                
                                 </p>
                             </div>
                         </Link>
@@ -41,9 +41,9 @@ const Services = () => {
                                 <div className='flex justify-center'>
                                     <img src={penicon} alt="pen-icon"  width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
                                 </div>
-                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Sell Giftcards</h3>
+                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Trade Giftcards</h3>
                                 <p className='text-[#0F2137]'>
-                                    Sell your iTunes, google play, stream, vanilla and all forms of gift cards easily without stress, receiving your exchange naira value in no time!
+                                    Sell your iTunes, google play, stream, vanilla and all premium Giftcards for naira seamlessly, receiving your naira value in no time!                                
                                 </p>
                             </div>  
                         </Link>
@@ -55,9 +55,9 @@ const Services = () => {
                                 <div className="flex justify-center">
                                     <img src={clockicon} alt="clock-icon"  width="60rem" height="60rem" className='my-4 hover:rotate-180 transition-all' />
                                 </div>
-                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Selling of Gadgets</h3>
+                                <h3 className='font-3xl font-bold my-3 text-[#0F2137]'>Buy PPE's</h3>
                                 <p className='text-[#0F2137]'>
-                                    Look no further, you indeed got to the right place to have your Bitcoin and Gift cards exchange into Cash immediately, just like that!
+                                    Buy durable Personal Protective Equipment from Generates Group. With the best discounts in the market today for protective shoes, booths, jackets and helmets.                                
                                 </p>
                             </div>
                         </Link>

@@ -49,13 +49,13 @@ const Footer = () => {
                         <h1 className='text-white text-2xl font-semibold sub-title' style={{fontWeight: 'bolder'}}>Products</h1>
                         <ul className='list-none'>
                             <li className='list-item my-4 text-gray-300 hover:text-[#FF9363] cursor-pointer'>
-                                <Link to="/services">Selling of cypto currenies</Link>
+                                <Link to="/services">Selling of cypto currencies</Link>
                             </li>
                             <li className='list-item my-4 text-gray-300 hover:text-[#FF9363] cursor-pointer'>
                                 <Link to="/services">Selling of gift cards</Link>
                             </li>
                             <li className='list-item my-4 text-gray-300 hover:text-[#FF9363] cursor-pointer'>
-                                <Link to="/services">Sellings of Gadgets</Link>
+                                <Link to="/services">Sellings of PPE's</Link>
                             </li>
                         </ul>
                     </div>

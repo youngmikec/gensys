@@ -8,7 +8,7 @@ const HeroCardThree = () => {
     return (
         <>
             <div className='w-full wrapper3'>
-                <div className='text-white w-4/12 ml-auto mr-28 py-10'>
+                <div className='text-white w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 lg:ml-28 ml-auto mr-auto py-10'>
                     <h1 className='text-6xl font-bold mb-4'>Trade Fast and Easy</h1>
                     <p>Trade giftcards for cash fast and seamlessly with Generates</p>
 

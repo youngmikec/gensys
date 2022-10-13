@@ -7,7 +7,7 @@ const HeroCardTwo = () => {
   return (
     <>
       <div className='w-full wrapper2'>
-        <div className='text-white  w-4/12 ml-auto mr-28 py-10'>
+        <div className='text-white w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 lg:ml-28 ml-auto mr-auto py-10'>
             <h1 className='text-6xl font-bold mb-4'>Personal Protective Equipments</h1>
             <p>Buy the best PPE's at up 40% discount with Generates</p>
 

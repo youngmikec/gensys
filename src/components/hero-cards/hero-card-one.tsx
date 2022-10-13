@@ -7,7 +7,7 @@ const HeroCardOne = () => {
   return (
     <>
         <div className='w-full wrapper1'>
-            <div className='text-white w-4/12 ml-28 mr-auto py-10'>
+            <div className='text-white w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 lg:ml-28 ml-auto mr-auto py-10'>
                 <p>Odogwu rates</p>
                 <h1 className='text-6xl font-bold mb-4'>The Best Market Value ON The Go</h1>
                 <p>Buy and Sell crypto with the most reliable exchanger.</p>

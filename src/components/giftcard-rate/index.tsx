@@ -66,7 +66,7 @@ const GiftCardRate = () => {
                         
                         <div className='px-1'>
                             <p className='text-sm font-bold'>Card Type</p>
-                            <input type="text" defaultValue="Physical card" readOnly className="my-4 rounded-lg bg-white text-black py-2 px-4" />
+                            <input type="text" defaultValue="Physical card" readOnly className="my-4 w-full rounded-lg bg-white text-black py-2 px-4" />
                         </div>
 
                         <div className='px-1'>
@@ -78,7 +78,7 @@ const GiftCardRate = () => {
                                 onChange={(e) => {
                                     setAmount(parseInt(e.target.value))
                                 }}
-                                className="my-4 rounded-lg bg-white text-black py-2 px-4" 
+                                className="my-4 w-full rounded-lg bg-white text-black py-2 px-4" 
                             />
                         </div>
                     </div>
