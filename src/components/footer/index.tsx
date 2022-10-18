@@ -64,7 +64,7 @@ const Footer = () => {
                         <h1 className='text-white text-2xl font-semibold sub-title' style={{fontWeight: 'bolder'}}>Company</h1>
                         <ul className='list-none'>
                             <li className='list-item my-4 text-gray-300 hover:text-[#FF9363] cursor-pointer'>
-                                <Link to="/services">About Genesys Exchange</Link>
+                                <Link to="/services">About Generates Exchange</Link>
                             </li>
                             <li className='list-item my-4 text-gray-300 hover:text-[#FF9363] cursor-pointer'>
                                 <Link to="/services">Blog</Link>
@@ -81,7 +81,7 @@ const Footer = () => {
                 <hr />
                 <div className='flex justify-between text-white'>
                     <div>
-                        <p>Copy Rights © 2022, Genesys. All right reserved</p>
+                        <p>Copy Rights © 2022, Generates. All right reserved</p>
                     </div>
                     <div>
                         <p><span className='hover:text-[#FF9363]'> Terms and Conditions </span> | <span className='hover:text-[#FF9363]'> Privacy Policies </span></p>
