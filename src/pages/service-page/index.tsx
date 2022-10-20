@@ -4,6 +4,7 @@ import Navbar from '../../components/navbar';
 
 import './style.css';
 import { whatsAppUrl } from '../../constant';
+import WhatsappButton from '../../components/whatsapp-btn';
 
 
 const ServicePage = () => {
@@ -15,7 +16,7 @@ const ServicePage = () => {
                 <h3 className='text-2xl font-bold mt-8'>Our Services</h3>
             </div>
 
-            <div className='grid grid-cols-2 w-10/12 mx-auto my-24'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-10/12 mx-auto my-24'>
                 <div>
                     <h3 className='text-xl font-bold my-4'>Buy and Sell Bitcoin and other Cryptocurrencies</h3>
                     <p>
@@ -31,7 +32,7 @@ const ServicePage = () => {
                 <div className='crypto-wrapper'></div>
             </div>
             
-            <div className='grid grid-cols-2 w-10/12 mx-auto my-24'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-10/12 mx-auto my-24'>
                 <div className='gift-wrapper'></div>
                 <div>
                     <h3 className='text-xl font-bold my-4'>Gift Card Redemption</h3>
@@ -44,7 +45,7 @@ const ServicePage = () => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-2 w-10/12 mx-auto my-24'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-10/12 mx-auto my-24'>
                 <div>
                     <h3 className='text-xl font-bold my-4'>Buy Personal Protective Equipments</h3>
                     <p>
@@ -70,6 +71,9 @@ const ServicePage = () => {
             </div>
         </div>
         </div>
+
+        {/* whatsapp */}
+        <WhatsappButton />
         <Footer />
     </>
   )

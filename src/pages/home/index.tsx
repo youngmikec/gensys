@@ -69,7 +69,7 @@ const Home = () => {
             </div>
         </div>
 
-        <div className='grid grid-cols-2 w-10/12 mx-auto my-24'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-10/12 mx-auto my-24'>
             <div className='about-wrapper'></div>
             <div>
                 <h3 className='text-xl font-bold my-4'>More Information About Us</h3>

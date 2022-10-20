@@ -3,6 +3,7 @@ import CryptoRate from '../../components/crypto-rate';
 import Footer from '../../components/footer';
 import GiftCardRate from '../../components/giftcard-rate';
 import Navbar from '../../components/navbar';
+import WhatsappButton from '../../components/whatsapp-btn';
 
 
 const Rating = () => {
@@ -21,6 +22,8 @@ const Rating = () => {
                     <GiftCardRate />
                 </div>
             </div>
+            {/* whatsapp */}
+            <WhatsappButton />
             <Footer />
         </>
     )
