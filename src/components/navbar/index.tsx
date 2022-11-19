@@ -21,6 +21,7 @@ const Navbar = ({bg, text}: Props) => {
               <li className='mx-6 inline text-lg text-white hover:text-[#FF9363]'><Link to="/">Home</Link></li>
               <li className='mx-6 inline text-lg text-white hover:text-[#FF9363]'><Link to="/services">Services</Link></li>
               <li className='mx-6 inline text-lg text-white hover:text-[#FF9363]'><Link to="/rating">Rates</Link></li>
+              <li className='mx-6 inline text-lg text-white hover:text-[#FF9363]'><Link to="/products">Products</Link></li>
             </ul>
           </div>
         </div>

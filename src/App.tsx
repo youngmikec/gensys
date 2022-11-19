@@ -1,18 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/home';
-import Rating from './pages/rating';
-import ServicePage from './pages/service-page';
+
+import { publicRoutes, RouteType } from './routes/auth-routes';
+import ProtectedRoutes, { UnProtectedRoutes } from './routes/protected-routes';
 
 
 function App() {
+  const getRoutes = (routes: RouteType[]) => routes.map((route: RouteType, index: number) => {
+    const Component = route.component;
+    return <Route key={index} path={route.path} element={ 
+      <UnProtectedRoutes>
+        {Component}
+      </UnProtectedRoutes>
+    } />
+  })
+
+  const getPrivateRoutes = (routes: RouteType[]) => routes.map((route: RouteType, index: number) => {
+    const Component = route.component;
+    return <Route key={index} path={route.path} element={ <ProtectedRoutes>{Component}</ProtectedRoutes>} />
+  })
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<ServicePage />} />
-        <Route path="/rating" element={<Rating />} />
+        {getRoutes(publicRoutes)}
+        {/* {getPrivateRoutes(privateRoutes)} */}
       </Routes>
     </Router>
   );
