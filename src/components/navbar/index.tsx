@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { IoCartOutline } from 'react-icons/io5';
+
 import logo from '../../assets/images/logo-redesign.jpeg';
 
 type Props = {
@@ -22,6 +24,11 @@ const Navbar = ({bg, text}: Props) => {
               <li className='mx-6 inline text-lg text-white hover:text-[#FF9363]'><Link to="/services">Services</Link></li>
               <li className='mx-6 inline text-lg text-white hover:text-[#FF9363]'><Link to="/rating">Rates</Link></li>
               <li className='mx-6 inline text-lg text-white hover:text-[#FF9363]'><Link to="/products">Products</Link></li>
+              <li className='mx-6 inline text-lg text-white hover:text-[#FF9363]'>
+                <Link to="/cart">
+                  <IoCartOutline className='inline mx-1' /> Cart
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
