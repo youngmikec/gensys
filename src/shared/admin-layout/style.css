@@ -1,0 +1,11 @@
+.content-wrapper{
+    background-color: #E5E5E5;
+    width: 100%;
+    min-height: 100vh;
+    max-height: max-content;
+    /* position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
+}

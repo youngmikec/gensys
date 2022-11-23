@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { publicRoutes, RouteType } from './routes/auth-routes';
+import { privateRoutes } from './routes/private-routes';
 import ProtectedRoutes, { UnProtectedRoutes } from './routes/protected-routes';
 
 
@@ -24,7 +25,7 @@ function App() {
     <Router>
       <Routes>
         {getRoutes(publicRoutes)}
-        {/* {getPrivateRoutes(privateRoutes)} */}
+        {getPrivateRoutes(privateRoutes)}
       </Routes>
     </Router>
   );
