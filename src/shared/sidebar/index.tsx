@@ -54,9 +54,9 @@ const Sidebar = ({sidebarMenus}: Props) => {
                     </li>
                     <li 
                         title="Products"
-                        className={ `my-6 py-3 px-4 text-left rounded-lg ${location.pathname === "/products" ? "bg-[#FF9363] text-white" : "bg-[#f1f1f1] text-[#757575]"}`}  
+                        className={ `my-6 py-3 px-4 text-left rounded-lg ${location.pathname === "/crm-products" ? "bg-[#FF9363] text-white" : "bg-[#f1f1f1] text-[#757575]"}`}  
                     >
-                        <Link to="/products" className="inline-flex">
+                        <Link to="/crm-products" className="inline-flex">
                             <BsBoxSeam />
                             <span className="inline-flex mx-2">Products</span>
                         </Link>

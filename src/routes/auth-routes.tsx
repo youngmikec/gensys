@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 
+// pages
 import Home from "../pages/home";
 import CartPage from "../pages/cart";
 import Rating from "../pages/rating";
