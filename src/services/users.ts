@@ -5,7 +5,6 @@ import axios from "./config";
 // const url = process.env.REACT_APP_BASE_URL;
 const url: string = "http://localhost:3000/api";
 const token: string = getItem('clientToken');
-console.log(token);
 
 export const RETRIEVE_USERS = async () => {
   return axios.get(`${url}/users`);
@@ -16,9 +15,9 @@ export const RETRIEVE_USER_BY_ID = async (id: string) => {
 };
 
 
-export const UPDATE_USER_BY_ADMIN = async (data: any) => {
+export const UPDATE_USER_BY_ADMIN = async (id: string, data: any) => {
   const payload = { ...data };
-  return axios.post(`${url}/user/admin/${data.id}`, payload, {
+  return axios.post(`${url}/user/admin/${id}`, payload, {
     headers: {},
   });
 };

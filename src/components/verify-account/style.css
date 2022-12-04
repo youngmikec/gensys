@@ -1,0 +1,9 @@
+.wrapper {
+    background-image: url('../../assets/images/crypto-bg-2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 4rem; 
+}

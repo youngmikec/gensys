@@ -45,8 +45,8 @@ const AdminUsersComp = () => {
   };
 
   const handleUserUpgrade = (id: string, role: string) => {
-    const data = { id, role };
-    UPDATE_USER_BY_ADMIN(data)
+    const data = { userType: role };
+    UPDATE_USER_BY_ADMIN(id, data)
       .then((res: AxiosResponse<ApiResponse>) => {
         const { message } = res.data;
         notify("success", message);
@@ -174,23 +174,23 @@ const AdminUsersComp = () => {
                                     <span
                                       className="items-left px-2 py-3"
                                       onClick={() =>
-                                        handleUserUpgrade(item.id, "editor")
+                                        handleUserUpgrade(item.id, "ADMIN")
                                       }
                                     >
-                                      Upgrade Editor
+                                      Upgrade to Admin
                                     </span>
                                   </li>
                                 )}
 
-                                {item.userType === "Admin" && (
+                                {item.userType === "ADMIN" && (
                                   <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
                                     <span
                                       className="items-left px-2 py-2"
                                       onClick={() =>
-                                        handleUserUpgrade(item.id, "user")
+                                        handleUserUpgrade(item.id, "USER")
                                       }
                                     >
-                                      Downgrade User
+                                      Downgrade to User
                                     </span>
                                   </li>
                                 )}

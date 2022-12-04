@@ -9,18 +9,25 @@ type Props = {
 
 export const ProtectedRoutes = ({ children }: Props) => {
   const token = getItem('clientToken');
-  if(token){
-    return children;
+  const clientD = getItem('clientD');
+
+  if(token && clientD){
+    if(clientD.userType === 'ADMIN') return children;
+    if(clientD.userType === 'USER') return <Navigate to="/" />
   }
+  
   return <Navigate to="/" />
 }
 
 export const UnProtectedRoutes = ({ children }: Props) => {
   const token = getItem('clientToken');
-  if(token){
-      return <Navigate to="/dashboard" />
-    }
-    return children;
+  const clientD = getItem('clientD');
+
+  if(token && clientD.userType === 'ADMIN'){
+    return <Navigate to="/dashboard" />
+  }
+  
+  return children;
 }
 
 export default ProtectedRoutes;

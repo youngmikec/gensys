@@ -72,9 +72,9 @@ const Sidebar = ({sidebarMenus}: Props) => {
                     </li>
                     <li 
                         title="Cryptocurrency"
-                        className={ `my-6 py-3 px-4 text-left rounded-lg ${location.pathname === "/crypto" ? "bg-[#FF9363] text-white" : "bg-[#f1f1f1] text-[#757575]"}`}  
+                        className={ `my-6 py-3 px-4 text-left rounded-lg ${location.pathname === "/cryptos" ? "bg-[#FF9363] text-white" : "bg-[#f1f1f1] text-[#757575]"}`}  
                     >
-                        <Link to="/crypto" className="inline-flex">
+                        <Link to="/cryptos" className="inline-flex">
                             <FaBtc />
                             <span className="inline-flex mx-2">Cryptocurrency</span>
                         </Link>

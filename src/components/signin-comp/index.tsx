@@ -64,9 +64,10 @@ const SignInComp = () => {
           setLoading(false);
           const { message, payload } = res.data;
           notify("success", message);
+          setItem("clientD", payload.user);
           setItem("clientToken", payload.token);
           setItem("auth", { isLoggedIn: true, user: payload.user });
-          window.location.href = "/dashboard";
+          window.location.href = "/products";
         })
         .catch((err: any) => {
           const { message } = err.response.data;
@@ -91,7 +92,7 @@ const SignInComp = () => {
               <h4 className="text-[#6A6A6A] text-xl font-bold text-center">
                 Sign In
               </h4>
-              <p className="text-[#BFBFBF] text-sm my-3">
+              <p className="text-[#BFBFBF] text-sm my-3 text-center">
                 If you have an account with us, please Sign In
               </p>
             </div>

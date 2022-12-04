@@ -9,6 +9,11 @@ export const RETRIEVE_PRODUCTS = async (query: string = '') => {
     return axios.get(uri);
 }
 
+export const RETRIEVE_PUBLIC_PRODUCTS = async (query: string = '') => {
+    let uri: string = `${url}/products/public${query}`;
+    return axios.get(uri, {});
+}
+
 export const CREATE_PRODUCT = async (data: any) => {
     let uri: string = `${url}/products`;
     return axios.post(uri, data)

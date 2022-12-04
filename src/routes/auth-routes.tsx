@@ -10,6 +10,8 @@ import ProductsDetail from "../pages/products/product-detail";
 import SignIn from "../pages/sign-in";
 import NotFoundPage from "../pages/Not-found";
 import AdminLogin from "../pages/admin/login";
+import Signup from "../pages/sign-up";
+import VerificatioinPage from "../pages/verification-page";
 
 
 export type RouteType = {
@@ -45,6 +47,14 @@ export const publicRoutes: RouteType[] = [
     {
         path: '/sign-in',
         component: <SignIn /> 
+    },
+    {
+        path: '/sign-up',
+        component: <Signup /> 
+    },
+    {
+        path: '/verify',
+        component: <VerificatioinPage /> 
     },
     {
         path: '/crm-login',
