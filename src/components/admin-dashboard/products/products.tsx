@@ -12,20 +12,24 @@ import { AiOutlineArrowUp, AiOutlinePlus } from 'react-icons/ai';
 
 import Card from '../../../shared/card';
 import { ApiResponse, Category, Product } from '../../../model';
-import { RETRIEVE_CATEGORIES, RETRIEVE_PRODUCTS } from '../../../services';
+import { DELETE_PRODUCT, RETRIEVE_CATEGORIES, RETRIEVE_PRODUCTS } from '../../../services';
 import { sortArray } from '../../../utils';
-import { INITIALIZE_PRODUCTS } from '../../../store/products';
+import { INITIALIZE_PRODUCTS, REMOVE_PRODUCT } from '../../../store/products';
 import AppModalComp from '../../../shared/app-modal';
-import { OpenAppModal } from '../../../store/modal';
+import { CloseAppModal, OpenAppModal } from '../../../store/modal';
 import ProductForm from './product-form';
 import { RootState } from '../../../store';
+import ProductUpdateForm from './product-update-form';
+import DeleteComp from '../delete-comp/delete-comp';
 
 
 function AdminProductsComp() {
     const dispatch = useDispatch();
     const Products: Product[] = useSelector((state: RootState) => state.productsState.value);
 
+    const [deleting, setDeleting] = useState<boolean>(false);
     const [products, setProducts] = useState<Product[]>([]);
+    const [currentProduct, setCurrentProduct] = useState<Product | undefined>();
     const [categories, setCategories] = useState<Category[]>([]);
     const [modalMode, setModalMode] = useState<string>('');
 
@@ -78,9 +82,30 @@ function AdminProductsComp() {
         }
     };
 
-    const openProductModal = (mode: string = 'create', id: string = '') => {
+    // Open product modal
+    const openModal = (mode: string = 'create', id: string = '') => {
         setModalMode(mode);
         dispatch(OpenAppModal());
+    }
+
+    // Delete product
+    const handleDeleteRecord = (id: string) => {
+        setDeleting(true);
+        DELETE_PRODUCT(id)
+        .then((res: AxiosResponse<ApiResponse>) => {
+            const { message, payload, success } = res.data;
+            if(success){
+                setDeleting(false);
+                notify("success", message);
+                dispatch(REMOVE_PRODUCT(payload.id));
+                dispatch(CloseAppModal());
+            }
+        })
+        .catch((err: any) => {
+            setDeleting(false);
+            const { message } = err.response.data;
+            notify("error", message);
+        });
     }
     
     useEffect(() => {
@@ -91,6 +116,7 @@ function AdminProductsComp() {
     useEffect(() => {
         setProducts(Products)
     }, [Products]);
+
 
     return (
         <>
@@ -153,7 +179,7 @@ function AdminProductsComp() {
                 <div className="flex justify-between mb-6">
                     <div>
                         <button 
-                            onClick={() => openProductModal('create')}
+                            onClick={() => openModal('create')}
                             className='rounded-lg py-3 px-4 text-center
                             bg-[#e9e9e9] text-[#8c8c8c] text-sm
                             hover:bg-[#FF9363] hover:text-white 
@@ -223,38 +249,35 @@ function AdminProductsComp() {
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
                                         >
-                                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                                         </svg>
-                                        {/* {item.userType === "USER" && (
-                                        <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap hover:text-white rounded-md text-sm md:text-base ">
-                                            <span
-                                            className="items-left px-2 py-3"
-                                            onClick={() =>
-                                                handleUserUpgrade(item.id, "editor")
-                                            }
-                                            >
-                                            Upgrade Editor
+                                        
+                                        <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
+                                            <span className="items-left px-2 py-2">
+                                                <Link to={`/crm-products/${item.id}`}>View Detail</Link>
                                             </span>
                                         </li>
-                                        )} */}
-
-                                        {/* {item.userType === "Admin" && (
-                                            <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
-                                                <span
-                                                className="items-left px-2 py-2"
-                                                onClick={() =>
-                                                    handleUserUpgrade(item.id, "user")
-                                                }
-                                                >
-                                                Downgrade User
-                                                </span>
-                                            </li>
-                                        )} */}
-
                                         <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
-                                        <span className="items-left px-2 py-2">
-                                            <Link to={`/crm-products/${item.id}`}>View Detail</Link>
-                                        </span>
+                                            <span 
+                                                className="items-left px-2 py-2"
+                                                onClick={() => {
+                                                    setCurrentProduct(item)
+                                                    openModal('update')
+                                                }}
+                                            >
+                                                Update Product
+                                            </span>
+                                        </li>
+                                        <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
+                                            <span 
+                                                className="items-left px-2 py-2"
+                                                onClick={() => {
+                                                    setCurrentProduct(item)
+                                                    openModal('delete')
+                                                }}
+                                            >
+                                                Delete Product
+                                            </span>
                                         </li>
                                     </ul>
                                     </div>
@@ -279,13 +302,10 @@ function AdminProductsComp() {
                 modalMode === 'create' && <ProductForm categories={categories} />
             }
             {
-                modalMode === 'view' && <div>welcome to view product modal</div>
+                modalMode === 'update' && <ProductUpdateForm categories={categories} product={currentProduct} />
             }
             {
-                modalMode === 'update' && <div>welcome to update product modal</div>
-            }
-            {
-                modalMode === 'delete' && <div>welcome to delete product modal</div>
+                modalMode === 'delete' && <DeleteComp id={currentProduct?.id} action={handleDeleteRecord} deleting={deleting} />
             }
         </AppModalComp>
 

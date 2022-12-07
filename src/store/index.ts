@@ -4,6 +4,7 @@ import categoriesReducer from './categories';
 import productsReducer from './products';
 import usersReducer from './users';
 import cryptosReducer from './cryptos';
+import ordersReducer from './orders';
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         categoriesState: categoriesReducer,
         usersState: usersReducer,
         cryptosState: cryptosReducer,
+        ordersState: ordersReducer,
     }
 });
 

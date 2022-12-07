@@ -17,7 +17,7 @@ export const categoriesSlice = createSlice({
             const { value } = state;
             state.value = [action.payload, ...value];
         },
-        UPDATE_CATEGORY: (state, action: PayloadAction<Category>) => {
+        UPDATE_CATEGORY_STATE: (state, action: PayloadAction<Category>) => {
             for(let i = 0; i < state.value.length; i++){
                 if(state.value[i].id === action.payload.id){
                     state.value[i] = action.payload;
@@ -32,6 +32,6 @@ export const categoriesSlice = createSlice({
     }
 })
 
-export const { INITIALIZE_CATEGORIES, ADD_TO_CATEGORIES, UPDATE_CATEGORY, REMOVE_CATEGORY } = categoriesSlice.actions;
+export const { INITIALIZE_CATEGORIES, ADD_TO_CATEGORIES, UPDATE_CATEGORY_STATE, REMOVE_CATEGORY } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

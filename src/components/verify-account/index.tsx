@@ -94,7 +94,7 @@ const VerifyAccountComp = () => {
                     <div id="form" className="mx-">
                         <div className="my-3">
                             <label htmlFor="code" className="text-[#BFBFBF] text-sm block">
-                                Email*
+                                Verification Code*
                             </label>
                             <input
                                 type="text"

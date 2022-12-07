@@ -21,7 +21,7 @@ export const CREATE_PRODUCT = async (data: any) => {
 
 export const UPDATE_PRODUCT = async (id: string, data: any) => {
     let uri: string = `${url}/products/${id}`;
-    return axios.patch(uri, data);
+    return axios.put(uri, data);
 }
 
 export const DELETE_PRODUCT = async (id: string) => {

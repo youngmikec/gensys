@@ -1,15 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from 'react-redux';
 import { AxiosResponse } from 'axios';
 
-import { ApiResponse } from '../../../model';
-import { CREATE_CATEGORY } from '../../../services';
-import { ADD_TO_CATEGORIES } from '../../../store/categories';
+import { ApiResponse, Category } from '../../../model';
+import { CREATE_CATEGORY, UPDATE_CATEGORY } from '../../../services';
+import { ADD_TO_CATEGORIES, UPDATE_CATEGORY_STATE } from '../../../store/categories';
 
+type Props = {
+    category?: Category,
+    formType: 'CREATE' | 'EDIT'
+}
 
-const CategoriesForm = () => {
+const CategoriesForm = ({ category, formType }: Props) => {
+
     const dispatch = useDispatch();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -104,9 +109,41 @@ const CategoriesForm = () => {
         }else {
             notify("error", `Fill in all required fields`);
         }  
-      };
+    };
 
+    const handleUpdate = () => {
+        if (inputCheck()) {
+            setLoading(true);
+            const id: string = category ? category.id : '';
+            const data = { 
+                name: name.value,
+                categoryImage: categoryImage.value
+            };
+          // axios.defaults.withCredentials = true;
+          UPDATE_CATEGORY(id, data)
+            .then((res: AxiosResponse<ApiResponse>) => {
+                const { message, payload } = res.data;
+                setLoading(false);
+                notify("success", message);
+                dispatch(UPDATE_CATEGORY_STATE(payload));
+                clearFormStates();
+            })
+            .catch((err: any) => {
+                const { message } = err.response.data;
+                notify("error", message);
+                setLoading(false);
+            });
+        }else {
+            notify("error", `Fill in all required fields`);
+        }  
+    };
 
+    useEffect(() => {
+        if(formType === 'EDIT' && category){
+            setName({...name, value: category.name})
+            setCategoryImage({...categoryImage, value: category.categoryImage})
+        }
+    }, [formType]);
 
     return (
         <>
@@ -133,7 +170,7 @@ const CategoriesForm = () => {
                         <label htmlFor="name" className="text-[#BFBFBF] text-sm block">
                             Category Image*
                         </label>
-                        
+
                         <div
                             className={`border-2 rounded-md my-3 h-60 w-full flex justify-center ${
                                 categoryImage.error ? "border-red-500" : "border-[#BFBFBF]"
@@ -157,14 +194,25 @@ const CategoriesForm = () => {
                     </div>
 
 
-                    <div className="my-3 text-center">
-                        <button
-                            onClick={() => handleSubmit()}
-                            className="bg-[#FF9363] text-white py-1 px-10 rounded-2xl"
-                        >
-                            {loading ? "Processing..." : "Create"}
-                        </button>
-                    </div>
+                    {
+                        formType === 'CREATE' ?
+                        <div className="my-3 text-center">
+                            <button
+                                onClick={() => handleSubmit()}
+                                className="bg-[#FF9363] text-white py-1 px-10 rounded-2xl"
+                            >
+                                {loading ? "Processing..." : "Create"}
+                            </button>
+                        </div> :
+                        <div className="my-3 text-center">
+                            <button
+                                onClick={() => handleUpdate()}
+                                className="bg-[#FF9363] text-white py-1 px-10 rounded-2xl"
+                            >
+                                {loading ? "Processing..." : "Update"}
+                            </button>
+                        </div>
+                    }
                 </div>
 
             </div>

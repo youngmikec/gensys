@@ -25,12 +25,12 @@ export const CREATE_CART = async (data: any) => {
 
 export const UPDATE_CART_BY_USER = async (id: string, data: any) => {
     let uri: string = `${url}/carts/user/${id}`;
-    return axios.patch(uri, data);
+    return axios.put(uri, data);
 }
 
 export const UPDATE_CART = async (id: string, data: any) => {
     let uri: string = `${url}/carts/${id}`;
-    return axios.patch(uri, data);
+    return axios.put(uri, data);
 }
 
 export const DELETE_CART = async (id: string) => {

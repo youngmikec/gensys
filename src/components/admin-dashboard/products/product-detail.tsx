@@ -104,6 +104,7 @@ const AdminProductDetailComp = () => {
                         </div>
                     </div>
                 </div>
+                
                 <div className="my-3">
                     <textarea
                         name="description"

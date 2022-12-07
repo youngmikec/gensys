@@ -67,6 +67,7 @@ const AdminLoginComp = () => {
             const { message, payload } = res.data;
             notify("success", message);
             setItem("clientToken", payload.token);
+            setItem("clientD", payload.user);
             setItem("auth", { isLoggedIn: true, user: payload.user });
             window.location.href = "/dashboard";
         })
@@ -93,7 +94,7 @@ const AdminLoginComp = () => {
               <h4 className="text-[#6A6A6A] text-xl font-bold text-center">
                 Admin Login
               </h4>
-              <p className="text-[#BFBFBF] text-sm my-3">
+              <p className="text-[#BFBFBF] text-sm my-3 text-center">
                 Enter your admin credentails to sign in
               </p>
             </div>

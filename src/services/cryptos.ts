@@ -22,7 +22,7 @@ export const CREATE_CRYPTO = async (data: any) => {
 
 export const UPDATE_CRYPTO = async (id: string, data: any) => {
     let uri: string = `${url}/cryptos/${id}`;
-    return axios.patch(uri, data);
+    return axios.put(uri, data);
 }
 
 export const DELETE_CRYPTO = async (id: string) => {

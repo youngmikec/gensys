@@ -15,8 +15,8 @@ const CryptoRate = () => {
 
     const calculateCryptoAmount = (qty: number) => {
         const rate = selectedCrypto?.rate
-        const total: number = rate ? (qty / rate) : qty;
-        setCryptoQty(total);
+        let total: number = rate ? ((qty * currencyRate) / rate) : qty;
+        setCryptoQty(parseFloat(total.toFixed(7)));
         converUsd2NGN(qty);
     }
     
@@ -65,6 +65,8 @@ const CryptoRate = () => {
                             value={crypto}
                             onChange={(e) => {
                                 setCrypto(e.target.value)
+                                setUsdQty(0)
+                                converUsd2NGN(0)
                                 handleSelectCrypto(e.target.value)
                             }}
                             className="my-4 w-full rounded-lg bg-white text-black py-2 px-4"
@@ -103,10 +105,11 @@ const CryptoRate = () => {
                     </div>
 
                     <div className='px-1'>
-                        <p className='text-sm font-bold'>Amount</p>
+                        <p className='text-sm font-bold'>Amount In USD</p>
                         <input 
                             type="number"
                             value={usdQty}
+                            min={1}
                             onChange={(e) => {
                                 calculateCryptoAmount(parseInt(e.target.value))
                                 setUsdQty(parseInt(e.target.value))
@@ -116,7 +119,7 @@ const CryptoRate = () => {
                     </div>
 
                     <div className='px-1'>
-                        <p className='text-sm font-bold'>To</p>
+                        <p className='text-sm font-bold'>Crypto Equivalent</p>
                         <input 
                             type="number"
                             value={cryptoQty}
@@ -134,7 +137,7 @@ const CryptoRate = () => {
                     Rate NGN { currencyRate ? currencyRate : 0 }/USD
                     <div className="flex justify-between">
                         <h3 className='text-xl font-bold'>Total</h3>
-                        <h3 className='text-xl font-bold'>{ typeof totalAmount === 'number' ? totalAmount : `${totalAmount}` }</h3>
+                        <h3 className='text-xl font-bold'>{ totalAmount ? totalAmount : 0 }</h3>
                     </div>
                 </div>
             </div> 

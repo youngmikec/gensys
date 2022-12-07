@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { AxiosResponse } from 'axios';
 import moment from "moment";
@@ -12,21 +11,25 @@ import defaultImage from '../../../assets/images/pic.jpg';
 
 import Card from '../../../shared/card';
 import { ApiResponse, Category } from '../../../model';
-import { RETRIEVE_CATEGORIES } from '../../../services';
+import { DELETE_CATEGORY, RETRIEVE_CATEGORIES } from '../../../services';
 import { sortArray } from '../../../utils';
-import { INITIALIZE_CATEGORIES } from '../../../store/categories';
+import { INITIALIZE_CATEGORIES, REMOVE_CATEGORY } from '../../../store/categories';
 import { BiEditAlt } from 'react-icons/bi';
-import { OpenAppModal } from '../../../store/modal';
+import { CloseAppModal, OpenAppModal } from '../../../store/modal';
 import AppModalComp from '../../../shared/app-modal';
 import CategoriesForm from './categories-form';
 import { RootState } from '../../../store';
+import CategoryDetail from './category-detail';
+import DeleteComp from '../delete-comp/delete-comp';
 
 
 function AdminCategoriesComp() {
     const dispatch = useDispatch();
     const Categories: Category[] = useSelector((state: RootState) => state.categoriesState.value);
     const [categories, setCategories] = useState<Category[]>([]);
-    const [modalMode, setModalMode] = useState<string>('');
+    const [currentCategory, setCurrentCategory] = useState<Category | undefined>();
+    const [modalMode, setModalMode] = useState<string>('delete');
+    const [deleting, setDeleting] = useState<boolean>(false);
 
     const notify = (type: string, msg: string) => {
         if (type === "success") {
@@ -43,7 +46,8 @@ function AdminCategoriesComp() {
     };
 
     const retrieveCategories = () => {
-        RETRIEVE_CATEGORIES()
+        const query: string = `?sort=name&populate=createdBy`;
+        RETRIEVE_CATEGORIES(query)
         .then((res: AxiosResponse<ApiResponse>) => {
             const { message, payload } = res.data;
             notify("success", message);
@@ -66,6 +70,25 @@ function AdminCategoriesComp() {
     const openModal = (mode: string = 'create', id: string = '') => {
         setModalMode(mode);
         dispatch(OpenAppModal());
+    }
+
+    const handleDeleteRecord = (id: string) => {
+        setDeleting(true);
+        DELETE_CATEGORY(id)
+        .then((res: AxiosResponse<ApiResponse>) => {
+            const { message, payload, success } = res.data;
+            if(success){
+                setDeleting(false);
+                notify("success", message);
+                dispatch(REMOVE_CATEGORY(payload.id));
+                dispatch(CloseAppModal());
+            }
+        })
+        .catch((err: any) => {
+            setDeleting(false);
+            const { message } = err.response.data;
+            notify("error", message);
+        });
     }
     
     useEffect(() => {
@@ -196,16 +219,25 @@ function AdminCategoriesComp() {
                                         >
                                         <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                                         </svg>
-                                        
+
                                         <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
-                                            <span className="text-left px-2 py-2">
-                                                <Link to={`${item.id}`}>View Detail</Link>
+                                            <span 
+                                                className="text-left px-2 py-2"
+                                                onClick={() => {
+                                                    openModal('view')
+                                                    setCurrentCategory(item)
+                                                }}
+                                            >
+                                                View Detail
                                             </span>
                                         </li>
                                         <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
                                             <span 
                                                 className="text-left px-2 py-2"
-                                                onClick={() => openModal('update')}
+                                                onClick={() => {
+                                                    setCurrentCategory(item)
+                                                    openModal('update')
+                                                }}
                                             >
                                                 Edit
                                             </span>
@@ -213,7 +245,10 @@ function AdminCategoriesComp() {
                                         <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
                                             <span 
                                                 className="text-left px-2 py-2"
-                                                onClick={() => openModal('delete')}
+                                                onClick={() => {
+                                                    setCurrentCategory(item)
+                                                    openModal('delete')
+                                                }}
                                             >
                                                 Delete
                                             </span>
@@ -238,16 +273,16 @@ function AdminCategoriesComp() {
 
             <AppModalComp title=''>
                 {
-                    modalMode === 'create' && <CategoriesForm />
+                    modalMode === 'create' && <CategoriesForm formType='CREATE' />
                 }
                 {
-                    modalMode === 'view' && <div>welcome to view product modal</div>
+                    modalMode === 'view' && <CategoryDetail category={currentCategory} />
                 }
                 {
-                    modalMode === 'update' && <div>welcome to update product modal</div>
+                    modalMode === 'update' && <CategoriesForm formType='EDIT' category={currentCategory} />
                 }
                 {
-                    modalMode === 'delete' && <div>welcome to delete product modal</div>
+                    modalMode === 'delete' && <DeleteComp id={currentCategory?.id} action={handleDeleteRecord} deleting={deleting} />
                 }
             </AppModalComp>
 

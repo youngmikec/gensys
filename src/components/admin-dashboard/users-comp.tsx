@@ -2,21 +2,33 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AxiosResponse } from "axios";
 import moment from "moment";
 
 //icons
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 
-import { ApiResponse, User } from "../../model";
 import Card from "../../shared/card";
 import { sortArray } from "../../utils";
-import { RETRIEVE_USERS, UPDATE_USER_BY_ADMIN } from "../../services";
-import { AxiosResponse } from "axios";
+import { ApiResponse, User } from "../../model";
+import { DELETE_USER, RETRIEVE_USERS, UPDATE_USER_BY_ADMIN } from "../../services";
+import { CloseAppModal, OpenAppModal } from "../../store/modal";
+import AppModalComp from "../../shared/app-modal";
+import DeleteComp from "./delete-comp/delete-comp";
+import { REMOVE_USER } from "../../store/users";
+import { RootState } from "../../store";
 
 const AdminUsersComp = () => {
-  const [users, setUsers] = useState<User[]>([]);
+  const usersState = useSelector((state: RootState) => state.usersState.value);
 
+  // states
+  const [users, setUsers] = useState<User[]>([]);
+  const [deleting, setDeleting] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<User | undefined>();
+
+  const dispatch = useDispatch()
   const notify = (type: string, msg: string) => {
     if (type === "success") {
       toast.success(msg, {
@@ -65,9 +77,36 @@ const AdminUsersComp = () => {
     }
   };
 
+  const openModal = () => {
+    dispatch(OpenAppModal());
+  }
+
+  const handleDeleteRecord = (id: string) => {
+    setDeleting(true);
+    DELETE_USER(id)
+    .then((res: AxiosResponse<ApiResponse>) => {
+        const { message, payload, success } = res.data;
+        if(success){
+            setDeleting(false);
+            notify("success", message);
+            dispatch(REMOVE_USER(payload.id));
+            dispatch(CloseAppModal());
+        }
+    })
+    .catch((err: any) => {
+        setDeleting(false);
+        const { message } = err.response.data;
+        notify("error", message);
+    });
+  }
+
   useEffect(() => {
     retrieveUsers();
   }, []);
+
+  useEffect(() => {
+    setUsers(usersState);
+  }, [usersState]);
 
   return (
     <>
@@ -200,6 +239,18 @@ const AdminUsersComp = () => {
                                     <Link to={`${item.id}`}>View Detail</Link>
                                   </span>
                                 </li>
+
+                                <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
+                                  <span 
+                                    className="items-left px-2 py-2"
+                                    onClick={() => {
+                                      setCurrentUser(item)
+                                      openModal()
+                                    }}
+                                  >
+                                    Delete User
+                                  </span>
+                                </li>
                               </ul>
                             </div>
                           </td>
@@ -218,6 +269,9 @@ const AdminUsersComp = () => {
         </div>
       </div>
 
+      <AppModalComp title=''>
+        <DeleteComp id={currentUser?.id} action={handleDeleteRecord} deleting={deleting} />
+      </AppModalComp>
       <ToastContainer />
     </>
   );

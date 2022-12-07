@@ -17,7 +17,7 @@ export const cryptosSlice = createSlice({
             const { value } = state;
             state.value = [action.payload, ...value];
         },
-        UPDATE_CRYPTO: (state, action: PayloadAction<CryptoCurrency>) => {
+        UPDATE_CRYPTO_STATE: (state, action: PayloadAction<CryptoCurrency>) => {
             for(let i = 0; i < state.value.length; i++){
                 if(state.value[i].id === action.payload.id){
                     state.value[i] = action.payload;
@@ -32,6 +32,6 @@ export const cryptosSlice = createSlice({
     }
 })
 
-export const { INITIALIZE_CRYPTOS, ADD_TO_CRYPTOS, UPDATE_CRYPTO, REMOVE_CRYPTO } = cryptosSlice.actions;
+export const { INITIALIZE_CRYPTOS, ADD_TO_CRYPTOS, UPDATE_CRYPTO_STATE, REMOVE_CRYPTO } = cryptosSlice.actions;
 
 export default cryptosSlice.reducer;

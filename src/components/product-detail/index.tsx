@@ -19,13 +19,14 @@ import { getItem } from '../../utils';
 const ProductDetailComp = () => {
     const blakFriday: string = 'https://image.shutterstock.com/image-illustration/black-friday-sale-poster-shopping-260nw-752443399.jpg';
 
-    const [loading, setLoading] = useState<boolean>(false);
-    let [orderQuantity, setOrderQuantity] = useState<number>(1);
-
     const params = useParams();
     const { id } = params;
-
+    
+    const [loading, setLoading] = useState<boolean>(false);
+    let [orderQuantity, setOrderQuantity] = useState<number>(1);
     const [product, setProduct] = useState<Product | undefined>();
+
+
 
     const retrieveProducts = () => {
         setLoading(true);
@@ -60,10 +61,10 @@ const ProductDetailComp = () => {
 
     const handleQuantityChange = (mode: string) => {
         if(mode === 'sum'){
-            setOrderQuantity(orderQuantity ++)
+            setOrderQuantity((count) => count + 1)
         }
         if(mode === 'sub'){
-            setOrderQuantity(orderQuantity --)
+            setOrderQuantity((count) => count - 1)
         }
     }
 

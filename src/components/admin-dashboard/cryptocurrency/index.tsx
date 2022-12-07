@@ -13,20 +13,25 @@ import defaultImage from '../../../assets/images/pic.jpg';
 
 import Card from '../../../shared/card';
 import { ApiResponse, Category, CryptoCurrency, Product } from '../../../model';
-import { RETRIEVE_CATEGORIES, RETRIEVE_CRYPTOS, RETRIEVE_PRODUCTS } from '../../../services';
+import { DELETE_CRYPTO, RETRIEVE_CATEGORIES, RETRIEVE_CRYPTOS, RETRIEVE_PRODUCTS } from '../../../services';
 import { sortArray } from '../../../utils';
 import { INITIALIZE_PRODUCTS } from '../../../store/products';
 import AppModalComp from '../../../shared/app-modal';
-import { OpenAppModal } from '../../../store/modal';
+import { CloseAppModal, OpenAppModal } from '../../../store/modal';
 import { RootState } from '../../../store';
 import CryptoForm from './crypto-form';
+import CryptoUpdateForm from './crypto-update-form';
+import DeleteComp from '../delete-comp/delete-comp';
+import { REMOVE_CRYPTO } from '../../../store/cryptos';
 
 
 function AdminCryptoComp() {
     const dispatch = useDispatch();
     const cryptoCurrencies: CryptoCurrency[] = useSelector((state: RootState) => state.cryptosState.value);
 
+    const [deleting, setDeleting] = useState<boolean>(false);
     const [cryptos, setCryptos] = useState<CryptoCurrency[]>([]);
+    const [selectedCrypto, setSelectedCrypto] = useState<CryptoCurrency | undefined>();
     const [modalMode, setModalMode] = useState<string>('');
 
     const notify = (type: string, msg: string) => {
@@ -58,7 +63,6 @@ function AdminCryptoComp() {
         });
     };
 
-
     const sortData = (field: string) => {
         const sortedArray: any[] = sortArray(cryptos, field);
         if (sortedArray.length > 0) {
@@ -69,6 +73,25 @@ function AdminCryptoComp() {
     const openCryptoModal = (mode: string = 'create', id: string = '') => {
         setModalMode(mode);
         dispatch(OpenAppModal());
+    }
+
+    const handleDeleteRecord = (id: string) => {
+        setDeleting(true);
+        DELETE_CRYPTO(id)
+        .then((res: AxiosResponse<ApiResponse>) => {
+            const { message, payload, success } = res.data;
+            if(success){
+                setDeleting(false);
+                notify("success", message);
+                dispatch(REMOVE_CRYPTO(payload.id));
+                dispatch(CloseAppModal());
+            }
+        })
+        .catch((err: any) => {
+            setDeleting(false);
+            const { message } = err.response.data;
+            notify("error", message);
+        });
     }
     
     useEffect(() => {
@@ -209,36 +232,36 @@ function AdminCryptoComp() {
                                         >
                                         <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                                         </svg>
-                                        {/* {item.userType === "USER" && (
-                                        <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap hover:text-white rounded-md text-sm md:text-base ">
-                                            <span
-                                            className="items-left px-2 py-3"
-                                            onClick={() =>
-                                                handleUserUpgrade(item.id, "editor")
-                                            }
+                                        
+                                        <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
+                                            <span 
+                                                className="items-left px-2 py-2"
                                             >
-                                            Upgrade Editor
+                                                <Link to={``}>View Detail</Link>
                                             </span>
                                         </li>
-                                        )} */}
-
-                                        {/* {item.userType === "Admin" && (
-                                            <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
-                                                <span
-                                                className="items-left px-2 py-2"
-                                                onClick={() =>
-                                                    handleUserUpgrade(item.id, "user")
-                                                }
-                                                >
-                                                Downgrade User
-                                                </span>
-                                            </li>
-                                        )} */}
 
                                         <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
-                                        <span className="items-left px-2 py-2">
-                                            <Link to={``}>View Detail</Link>
-                                        </span>
+                                            <span 
+                                                className="items-left px-2 py-2"
+                                                onClick={() => {
+                                                    setSelectedCrypto(item)
+                                                    openCryptoModal('update');
+                                                }}
+                                            >
+                                                Update Crypto
+                                            </span>
+                                        </li>
+                                        <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
+                                            <span 
+                                                className="items-left px-2 py-2"
+                                                onClick={() => {
+                                                    setSelectedCrypto(item)
+                                                    openCryptoModal('delete');
+                                                }}
+                                            >
+                                                Delete Crypto
+                                            </span>
                                         </li>
                                     </ul>
                                     </div>
@@ -266,10 +289,10 @@ function AdminCryptoComp() {
                 modalMode === 'view' && <div>welcome to view product modal</div>
             }
             {
-                modalMode === 'update' && <div>welcome to update product modal</div>
+                modalMode === 'update' && <CryptoUpdateForm crypto={selectedCrypto}  />
             }
             {
-                modalMode === 'delete' && <div>welcome to delete product modal</div>
+                modalMode === 'delete' && <DeleteComp id={selectedCrypto?.id} action={handleDeleteRecord} deleting={deleting} />
             }
         </AppModalComp>
 

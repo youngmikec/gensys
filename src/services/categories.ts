@@ -21,7 +21,7 @@ export const CREATE_CATEGORY = async (data: any) => {
 
 export const UPDATE_CATEGORY = async (id: string, data: any) => {
     let uri: string = `${url}/categories/${id}`;
-    return axios.patch(uri, data);
+    return axios.put(uri, data);
 }
 
 export const DELETE_CATEGORY = async (id: string) => {

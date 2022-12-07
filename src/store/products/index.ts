@@ -17,7 +17,7 @@ export const productsSlice = createSlice({
             const { value } = state;
             state.value = [action.payload, ...value];
         },
-        UPDATE_PRODUCT: (state, action: PayloadAction<Product>) => {
+        UPDATE_PRODUCT_STATE: (state, action: PayloadAction<Product>) => {
             for(let i = 0; i < state.value.length; i++){
                 if(state.value[i].id === action.payload.id){
                     state.value[i] = action.payload;
@@ -32,6 +32,6 @@ export const productsSlice = createSlice({
     }
 })
 
-export const { INITIALIZE_PRODUCTS, ADD_TO_PRODUCTS, UPDATE_PRODUCT, REMOVE_PRODUCT } = productsSlice.actions;
+export const { INITIALIZE_PRODUCTS, ADD_TO_PRODUCTS, UPDATE_PRODUCT_STATE, REMOVE_PRODUCT } = productsSlice.actions;
 
 export default productsSlice.reducer;
