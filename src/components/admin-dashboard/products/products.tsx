@@ -307,9 +307,9 @@ function AdminProductsComp() {
             {
                 modalMode === 'delete' && <DeleteComp id={currentProduct?.id} action={handleDeleteRecord} deleting={deleting} />
             }
-        </AppModalComp>
+            </AppModalComp>
 
-        <ToastContainer />
+            <ToastContainer />
         </>
     )
 }

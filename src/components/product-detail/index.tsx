@@ -10,10 +10,9 @@ import { TbCurrencyNaira } from 'react-icons/tb';
 
 
 import Card from '../../shared/card';
-import ProductSection from '../../shared/products-layout/product-section';
 import { ApiResponse, Product } from '../../model';
 import { RETRIEVE_PUBLIC_PRODUCTS } from '../../services';
-import { CREATE_CART_BY_USER } from '../../services/carts';
+import { UPDATE_CART_BY_USER } from '../../services/carts';
 import { getItem } from '../../utils';
 
 const ProductDetailComp = () => {
@@ -24,6 +23,7 @@ const ProductDetailComp = () => {
     
     const [loading, setLoading] = useState<boolean>(false);
     let [orderQuantity, setOrderQuantity] = useState<number>(1);
+    let [totalAmount, setTotalAmount] = useState<number>(0);
     const [product, setProduct] = useState<Product | undefined>();
 
 
@@ -73,21 +73,40 @@ const ProductDetailComp = () => {
     }
 
     const handleAddToCart = () => {
+        setLoading(true);
         const user = getItem('clientD');
-        if(!!user) return notify('error', 'Pls signin or sign up');
+        if(user == undefined || null) return notify('error', 'Pls signin or sign up');
 
         // create products 
-        const data = {
-            user: user.id,
-            products: []
-        }
-
-        CREATE_CART_BY_USER(data).then((res: AxiosResponse<ApiResponse>) => {
-            const { message, success, payload } = res.data;
-            if(success){
-                notify('success', message)
+        if(user.cart){
+            const data = {
+                type: 'ADD',
+                products: [ {
+                    qty: orderQuantity,
+                    product: product ? product.id : '',
+                    totalAmount: product ? (product.price * orderQuantity) : 0
+                }]
             }
-        })
+            console.log({ data });
+             
+            UPDATE_CART_BY_USER(user.cart, data).then((res: AxiosResponse<ApiResponse>) => {
+                const { message, success } = res.data;
+                if(success){
+                    setLoading(false);
+                    notify('success', message);
+                    setTimeout(() => {
+                        window.location.href = '/cart'
+                    }, 3000);
+                }
+            }).catch((err: any) => {
+                const { message } = err.response.data;
+                setLoading(false);
+                notify('error', message);
+            })
+        }else {
+            notify('error', 'No cart found for this user');
+        }
+        return
     }
 
 
@@ -140,8 +159,11 @@ const ProductDetailComp = () => {
                                         </div>
                                         
                                         <div className="text-center my-6 w-full">
-                                            <button className='bg-[#FF9363] text-white font-semibold w-full text-center py-2 rounded-md'>
-                                                Add To Cart
+                                            <button 
+                                                className='bg-[#FF9363] text-white font-semibold w-full text-center py-2 rounded-md'
+                                                onClick={() => handleAddToCart()}
+                                            >
+                                               { loading ? 'Processing' : 'Add To Cart'}
                                             </button>
                                         </div>
                                     </div>
@@ -193,8 +215,11 @@ const ProductDetailComp = () => {
                                     </div>
                                 </div>
                                 <div className="text-center my-2 w-full">
-                                    <button className='bg-[#FF9363] text-white font-semibold w-full text-center py-2 rounded-md'>
-                                        Add To Cart
+                                    <button 
+                                        className='bg-[#FF9363] text-white font-semibold w-full text-center py-2 rounded-md'
+                                        onClick={() => handleAddToCart()}
+                                    >
+                                        { loading ? 'Processing' : 'Add To Cart'}
                                     </button>
                                 </div>
                             </Card>
