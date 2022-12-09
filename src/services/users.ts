@@ -2,8 +2,8 @@ import { getItem } from "../utils";
 import axios from "./config";
 // axios.defaults.withCredentials = true;
 
-// const url = process.env.REACT_APP_BASE_URL;
-const url: string = "http://localhost:3000/api";
+const url = "https://generate-api.onrender.com/api";
+// const url: string = "http://localhost:3000/api";
 const token: string = getItem('clientToken');
 
 export const RETRIEVE_USERS = async () => {

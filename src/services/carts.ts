@@ -1,7 +1,7 @@
 import axios from './config';
 // axios.defaults.withCredentials = true;
 
-// const url = process.env.REACT_APP_BASE_URL;
+// const url = "https://generate-api.onrender.com/api";
 const url = "http://localhost:3000/api";
     
 

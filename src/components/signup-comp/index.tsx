@@ -13,9 +13,9 @@ import { setItem } from "../../utils";
 import { ApiResponse } from "../../model";
 
 const SignupComp = () => {
-  // const url: any = process.env.REACT_APP_BASE_URL;
-  // const url: string = "https://generate-api.onrender.com/api";
-  const url: string = "http://localhost:3000/api";
+  // const url: any = "https://generate-api.onrender.com/api";
+  const url: string = "https://generate-api.onrender.com/api";
+//   const url: string = "http://localhost:3000/api";
 
   // local States
   const [loading, setLoading] = useState<boolean>(false);

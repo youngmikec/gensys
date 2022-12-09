@@ -168,9 +168,9 @@ function AdminOrdersComp() {
                     <table className="table table-auto w-full mx-auto border-spacing-y-4">
                         <thead>
                             <tr className='border-spacing-y-4'>
-                                <th className='table-caption text-left'>Currency</th>
-                                <th>Order code</th>
+                                <th className='table-caption text-left'>Order code</th>
                                 <th>No of items</th>
+                                <th>Currency</th>
                                 <th>Amount</th>
                                 <th>Date</th>
                                 <th>Status</th>
@@ -183,9 +183,9 @@ function AdminOrdersComp() {
                                 orders.map((item: Order, key: number) => {
                                     return (
                                         <tr key={key} className="my-4">
-                                        <td className='text-left border-spacing-y-4'>NGN</td>
-                                        <td className='text-center py-3 capitalize'>{item?.code}</td>
+                                        <td className='text-center border-spacing-y-4'>{item?.code}</td>
                                         <td className='text-center py-3'>{item?.productItems.length}</td>
+                                        <td className='text-left py-3 capitalize'>NGN</td>
                                         <td className='text-center py-3'>{item?.totalAmount}</td>
                                         <td className='text-center py-3'>{moment(item?.createdAt).format("DD-MM-YYYY")}</td>
                                         <td className='text-center py-3'>
