@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import { AxiosResponse } from 'axios';
 
 import "./style.css";
 import logo from "../../assets/images/logo-orange.png";
 
-import { getItem, setItem } from "../../utils";
+import { getItem } from "../../utils";
 import { ApiResponse } from "../../model";
+import { USER_ACCOUNT_VERIFY } from "../../services";
 
 const VerifyAccountComp = () => {
-    // const url: any = "https://generate-api.onrender.com/api";
-    const url: string = "https://generate-api.onrender.com/api";
-    // const url: string = "http://localhost:3000/api";
 
     // local States
     const [loading, setLoading] = useState<boolean>(false);
@@ -53,12 +49,11 @@ const VerifyAccountComp = () => {
       
       if(userId === '' || null || undefined) return notify('error', 'No user found pls Signup');
       const data = { code: code.value, id:  userId};
-      // axios.defaults.withCredentials = true;
-      axios
-        .post(`${url}/users/verify`, data)
+
+      USER_ACCOUNT_VERIFY(data)
         .then((res: AxiosResponse<ApiResponse>) => {
           setLoading(false);
-          const { message, payload } = res.data;
+          const { message } = res.data;
           notify("success", message);
           window.location.href = "/sign-in";
         })
@@ -108,21 +103,6 @@ const VerifyAccountComp = () => {
                                 } rounded-md px-4 py-2 w-full`}
                             />
                         </div>
-
-
-                        {/* <div className="my-3 flex justify-between">
-                            <div>
-                            <input type="checkBox" className="shadow-sm border-0" />
-                            <span className="text-[#BFBFBF] text-sm mx-3">
-                                Remember me?
-                            </span>
-                            </div>
-                            <div>
-                                <p className="text-[#FF9363]">
-                                    <Link to="/forgot-password">Forgot Password</Link>
-                                </p>
-                            </div>
-                        </div> */}
 
                         <div className="my-3 text-center">
                             <button

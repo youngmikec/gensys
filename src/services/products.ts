@@ -1,7 +1,4 @@
-import axios from './config';
-// axios.defaults.withCredentials = true;
-
-const url = "https://generate-api.onrender.com/api";
+import axios, { url } from './config';
     
 
 export const RETRIEVE_PRODUCTS = async (query: string = '') => {

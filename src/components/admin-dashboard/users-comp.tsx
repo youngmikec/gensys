@@ -125,10 +125,6 @@ const AdminUsersComp = () => {
                   className="relative mx-1 px-1 py-2 group  mb-1 md:mb-0"
                   id="button_pm"
                 >
-                  {/* <span className="firstlevel hover:text-red-500 whitespace-no-wrap text-gray-600 hover:text-blue-800"
-                                    >
-                                        <BiEditAlt className="text-blue hover:cursor-pointer inline" />
-                                    </span> */}
                   <div
                     className="bg-[#494949] text-white py-0 lg:py-1 px-2 lg:px-3
                     rounded-l-none rounded-r-3xl rounded-b-3xl hover:cursor-pointer inline-block"

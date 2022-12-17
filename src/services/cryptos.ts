@@ -1,8 +1,4 @@
-import axios from './config';
-// axios.defaults.withCredentials = true;
-
-const url = "https://generate-api.onrender.com/api";
-// const url = "http://localhost:3000/api";
+import axios, { url } from './config';
     
 
 export const RETRIEVE_CRYPTOS = async (query: string = '') => {

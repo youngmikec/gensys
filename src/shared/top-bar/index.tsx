@@ -14,6 +14,7 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 //icons
 import profile from "../../assets/images/profile.png";
 import { getItem } from "../../utils";
+import { User } from "../../model";
 // import { RETRIEVE_USER_PROFILE } from "../../services";
 
 const Topbar = () => {
@@ -36,17 +37,10 @@ const Topbar = () => {
     window.location.href = "/sign-in";
   };
 
-//   const retrieveProfile = () => {
-//     RETRIEVE_USER_PROFILE()
-//       .then((res) => {
-//         const { data } = res.data;
-//         setUsername(data.lastname);
-//       })
-//       .catch((err) => {
-//         const { error } = err.response.data;
-//         console.log(error);
-//       });
-//   };
+  const retrieveProfile = () => {
+    const user: User = getItem('clientD');
+    user ? setUsername(`${user.firstName}`) : setUsername('Admin');
+  };
 
   useEffect(() => {
     const { user } = getItem("auth");
@@ -56,7 +50,7 @@ const Topbar = () => {
   }, []);
 
   useEffect(() => {
-    // retrieveProfile();
+    retrieveProfile();
   }, []);
 
   return (

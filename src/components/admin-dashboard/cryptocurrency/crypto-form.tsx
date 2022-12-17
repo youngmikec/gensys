@@ -14,15 +14,9 @@ const CryptoForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const [cryptoImage, setCryptoImage] = useState<{value: string, error: boolean }>({value: '', error: false});
-    const [barcode, setBarcode] = useState<{value: string, error: boolean }>({value: '', error: false});
     const [name, setName] = useState<{value: string, error: boolean }>({value: '', error: false});
     const [shortName, setShortName] = useState<{value: string, error: boolean }>({value: '', error: false});
-    const [walletAddress, setWalletAddress] = useState<{value: string, error: boolean }>({value: '', error: false});
-    const [bankName, setBankName] = useState<{value: string, error: boolean }>({value: '', error: false});
-    const [accountName, setAccountName] = useState<{value: string, error: boolean }>({value: '', error: false});
-    const [accountNumber, setAccountNumber] = useState<{value: string, error: boolean }>({value: '', error: false});
     const [rate, setRate] = useState<{value: number, error: boolean }>({value: 0, error: false});
-    const [exchangePlatform, setExchangePlatform] = useState<{value: string, error: boolean }>({value: '', error: false});
 
     const cryptoFileRef = useRef<HTMLInputElement>(null);
     const barcodeFileRef = useRef<HTMLInputElement>(null);
@@ -34,7 +28,7 @@ const CryptoForm = () => {
     const handleFileRead = async (event: any, type: string = 'crypto') => {
         const file = event.target.files[0];
         const base64: any = await convertBase64(file);
-        type === 'crypto' ? setCryptoImage({...cryptoImage, value: base64}) : setBarcode({...barcode, value: base64})
+        setCryptoImage({...cryptoImage, value: base64})
     }
 
     const convertBase64 = (file: any) => {
@@ -50,7 +44,7 @@ const CryptoForm = () => {
         })
     }
 
-    const notify = (type: string, msg: string) => {
+    const notify = (type: string, msg: string): void => {
         if (type === "success") {
         toast.success(msg, {
             position: toast.POSITION.TOP_RIGHT,
@@ -78,50 +72,28 @@ const CryptoForm = () => {
         } else {
           setShortName({ ...shortName, error: false });
         }
-        if (walletAddress.value === "" || undefined || null) {
-          isValid = false;
-          setWalletAddress({ ...walletAddress, error: true });
-        } else {
-          setWalletAddress({ ...walletAddress, error: false });
-        }
-        if (exchangePlatform.value === "" || undefined || null) {
-          isValid = false;
-          setExchangePlatform({ ...exchangePlatform, error: true });
-        } else {
-          setExchangePlatform({ ...exchangePlatform, error: false });
-        }
+        
         if (rate.value === 0 || undefined || null) {
           isValid = false;
           setRate({ ...rate, error: true });
         } else {
           setRate({ ...rate, error: false });
         }
+
         if (cryptoImage.value === "" || undefined || null) {
           isValid = false;
           setCryptoImage({ ...cryptoImage, error: true });
         } else {
           setCryptoImage({ ...cryptoImage, error: false });
         }
-        if (barcode.value === "" || undefined || null) {
-          isValid = false;
-          setBarcode({ ...barcode, error: true });
-        } else {
-          setBarcode({ ...barcode, error: false });
-        }
         
         return isValid;
     };
 
-    const clearFormStates = () => {
+    const clearFormStates = (): void => {
         setCryptoImage({value: '', error: false});
-        setBarcode({value: '', error: false});
         setName({value: '', error: false});
         setShortName({value: '', error: false});
-        setWalletAddress({value: '', error: false});
-        setExchangePlatform({value: '', error: false});
-        setBankName({value: '', error: false});
-        setAccountName({value: '', error: false});
-        setAccountNumber({value: '', error: false});
         setRate({value: 0, error: false});
     }
 
@@ -133,12 +105,6 @@ const CryptoForm = () => {
                 shortName: shortName.value,
                 rate: rate.value,
                 cryptoImage: cryptoImage.value,
-                barcode: barcode.value,
-                walletAddress: walletAddress.value,
-                exchangePlatform: exchangePlatform.value,
-                bankName: bankName.value,
-                accountName: accountName.value,
-                accountNumber: accountNumber.value,
             };
           // axios.defaults.withCredentials = true;
             CREATE_CRYPTO(data)
@@ -157,9 +123,7 @@ const CryptoForm = () => {
         }else {
             notify("error", `Fill in all required fields`);
         }  
-      };
-
-
+    };
 
     return (
         <>
@@ -190,30 +154,6 @@ const CryptoForm = () => {
                         </div>
                     </div>
                     
-                    <div className="my-3">
-                        <label htmlFor="barcode" className="text-[#BFBFBF] text-sm block">
-                            Barcode
-                        </label>
-                        <div
-                            className={`border-2 rounded-md my-3 h-60 w-full flex justify-center ${
-                                barcode.error ? "border-red-500" : "border-[#BFBFBF]"
-                            } px-4 py-2 `}
-                        >
-                            {
-                                barcode.value ? 
-                                <img src={barcode?.value} alt="uploaded" /> :
-                                <button className='text-center text-[#7F7F80]' onClick={() => openFile('barcode')}>
-                                    + <br /> Choose file
-                                </button>
-                            }
-                            <input 
-                                type="file" 
-                                className='hidden'
-                                ref={barcodeFileRef}
-                                onChange={(e) => handleFileRead(e, 'barcode')}
-                            />
-                        </div>
-                    </div>
                 </div>
 
                 <div>
@@ -254,40 +194,6 @@ const CryptoForm = () => {
                         </div>
 
                         <div className="my-3">
-                            <label htmlFor="walletAddress" className="text-[#BFBFBF] text-sm block">
-                                Wallet Address*
-                            </label>
-                            <input
-                                type="text"
-                                name="walletAddress"
-                                value={walletAddress.value}
-                                onChange={(e) =>
-                                    setWalletAddress({ ...walletAddress, value: e.target.value })
-                                }
-                                className={`bg-white text-[#6A6A6A] border-2 ${
-                                    walletAddress.error ? "border-red-500" : "border-[#BFBFBF]"
-                                } rounded-md px-4 py-2 w-full`}
-                            />
-                        </div>
-
-                        <div className="my-3">
-                            <label htmlFor="exchangePlatform" className="text-[#BFBFBF] text-sm block">
-                                Exchange Platform for payment*
-                            </label>
-                            <input
-                                type="text"
-                                name="exchangePlatform"
-                                value={exchangePlatform.value}
-                                onChange={(e) =>
-                                    setExchangePlatform({ ...exchangePlatform, value: e.target.value })
-                                }
-                                className={`bg-white text-[#6A6A6A] border-2 ${
-                                    exchangePlatform.error ? "border-red-500" : "border-[#BFBFBF]"
-                                } rounded-md px-4 py-2 w-full`}
-                            />
-                        </div>
-
-                        <div className="my-3">
                             <label htmlFor="rate" className="text-[#BFBFBF] text-sm block">
                                 Rate In NGN*
                             </label>
@@ -301,57 +207,6 @@ const CryptoForm = () => {
                                 }
                                 className={`bg-white text-[#6A6A6A] border-2 ${
                                     rate.error ? "border-red-500" : "border-[#BFBFBF]"
-                                } rounded-md px-4 py-2 w-full`}
-                            />
-                        </div>
-
-                        <div className="my-3">
-                            <label htmlFor="bankName" className="text-[#BFBFBF] text-sm block">
-                                Bank to Receive Payment*
-                            </label>
-                            <input
-                                type="text"
-                                name="bankName"
-                                value={bankName.value}
-                                onChange={(e) =>
-                                    setBankName({ ...bankName, value: e.target.value })
-                                }
-                                className={`bg-white text-[#6A6A6A] border-2 ${
-                                    bankName.error ? "border-red-500" : "border-[#BFBFBF]"
-                                } rounded-md px-4 py-2 w-full`}
-                            />
-                        </div>
-
-                        <div className="my-3">
-                            <label htmlFor="accountName" className="text-[#BFBFBF] text-sm block">
-                                Account Name*
-                            </label>
-                            <input
-                                type="text"
-                                name="accountName"
-                                value={accountName.value}
-                                onChange={(e) =>
-                                    setAccountName({ ...accountName, value: e.target.value })
-                                }
-                                className={`bg-white text-[#6A6A6A] border-2 ${
-                                    accountName.error ? "border-red-500" : "border-[#BFBFBF]"
-                                } rounded-md px-4 py-2 w-full`}
-                            />
-                        </div>
-
-                        <div className="my-3">
-                            <label htmlFor="accountNumber" className="text-[#BFBFBF] text-sm block">
-                                Account Number*
-                            </label>
-                            <input
-                                type="text"
-                                name="accountNumber"
-                                value={accountNumber.value}
-                                onChange={(e) =>
-                                    setAccountNumber({ ...accountNumber, value: e.target.value })
-                                }
-                                className={`bg-white text-[#6A6A6A] border-2 ${
-                                    accountNumber.error ? "border-red-500" : "border-[#BFBFBF]"
                                 } rounded-md px-4 py-2 w-full`}
                             />
                         </div>
@@ -374,8 +229,6 @@ const CryptoForm = () => {
 
                             </textarea>
                         </div> */}
-
-
 
                         <div className="my-3 text-center">
                             <button

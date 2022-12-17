@@ -200,7 +200,7 @@ function AdminProductsComp() {
                         <tr className="border-spacing-y-4">
                             <th className="table-caption text-left">Code</th>
                             <th>Name</th>
-                            <th>Sku</th>
+                            {/* <th>Sku</th> */}
                             <th>Category</th>
                             <th>Price</th>
                             <th>Discount</th>
@@ -220,9 +220,9 @@ function AdminProductsComp() {
                                 <td className="text-center py-3 capitalize">
                                     {item?.name}
                                 </td>
-                                <td className="text-center py-3 capitalize">
+                                {/* <td className="text-center py-3 capitalize">
                                     {item?.sku}
-                                </td>
+                                </td> */}
                                 <td className="text-center py-3 capitalize">
                                     {item?.category?.name}
                                 </td>

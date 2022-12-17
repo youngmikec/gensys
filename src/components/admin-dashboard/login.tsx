@@ -8,11 +8,9 @@ import "./style.css";
 import { setItem } from "../../utils";
 import logo from "../../assets/images/logo-orange.png";
 import { ApiResponse } from "../../model";
+import { ADMIN_LOGIN } from "../../services";
 
 const AdminLoginComp = () => {
-  // const url: any = "https://generate-api.onrender.com/api";
-  const url: string = "https://generate-api.onrender.com/api";
-  // const url: string = "http://localhost:3000/api";
 
   // local States
   const [loading, setLoading] = useState<boolean>(false);
@@ -60,8 +58,7 @@ const AdminLoginComp = () => {
     if (inputCheck()) {
       setLoading(true);
       const data = { email: email.value, password: password.value };
-      axios
-        .post(`${url}/admin/login`, data)
+      ADMIN_LOGIN(data)
         .then((res: AxiosResponse<ApiResponse>) => {
             setLoading(false);
             const { message, payload } = res.data;

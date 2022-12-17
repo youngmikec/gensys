@@ -18,8 +18,6 @@ const ProductForm = ({categories}: Props) => {
 
     const [productImage, setProductImage] = useState<{value: string, error: boolean }>({value: '', error: false});
     const [name, setName] = useState<{value: string, error: boolean }>({value: '', error: false});
-    const [sku, setSku] = useState<{value: string, error: boolean }>({value: '', error: false});
-    const [make, setMake] = useState<{value: string, error: boolean }>({value: '', error: false});
     const [description, setDescription] = useState<{value: string, error: boolean }>({value: '', error: false});
     const [price, setPrice] = useState<{value: number, error: boolean }>({value: 0, error: false});
     const [discount, setDiscount] = useState<{value: number, error: boolean }>({value: 0, error: false});
@@ -73,54 +71,42 @@ const ProductForm = ({categories}: Props) => {
         } else {
           setName({ ...name, error: false });
         }
-        if (sku.value === "" || undefined || null) {
-          isValid = false;
-          setSku({ ...sku, error: true });
-        } else {
-          setSku({ ...sku, error: false });
-        }
-        if (make.value === "" || undefined || null) {
-          isValid = false;
-          setMake({ ...make, error: true });
-        } else {
-          setMake({ ...make, error: false });
-        }
+        
         if (category.value === "" || undefined || null) {
           isValid = false;
           setCategory({ ...category, error: true });
         } else {
           setCategory({ ...category, error: false });
         }
+
         if (description.value === "" || undefined || null) {
           isValid = false;
           setDescription({ ...description, error: true });
         } else {
           setDescription({ ...description, error: false });
         }
+
         if (description.value === "" || undefined || null) {
           isValid = false;
           setDescription({ ...description, error: true });
         } else {
           setDescription({ ...description, error: false });
         }
+
         if (productImage.value === "" || undefined || null) {
           isValid = false;
           setProductImage({ ...productImage, error: true });
         } else {
           setProductImage({ ...productImage, error: false });
         }
+
         if (price.value === 0 || undefined || null) {
           isValid = false;
           setPrice({ ...price, error: true });
         } else {
           setPrice({ ...price, error: false });
         }
-        if (discount.value === 0 || undefined || null) {
-          isValid = false;
-          setDiscount({ ...discount, error: true });
-        } else {
-          setDiscount({ ...discount, error: false });
-        }
+        
         if (quantity.value === 0 || undefined || null) {
           isValid = false;
           setQuantity({ ...quantity, error: true });
@@ -134,8 +120,8 @@ const ProductForm = ({categories}: Props) => {
     const clearFormStates = () => {
         setProductImage({value: '', error: false});
         setName({value: '', error: false});
-        setSku({value: '', error: false});
-        setMake({value: '', error: false});
+        // setSku({value: '', error: false});
+        // setMake({value: '', error: false});
         setDescription({value: '', error: false});
         setCategory({value: '', error: false});
         setPrice({value: 0, error: false});
@@ -148,8 +134,6 @@ const ProductForm = ({categories}: Props) => {
             setLoading(true);
             const data = { 
                 name: name.value,
-                sku: sku.value,
-                make: make.value,
                 description: description.value,
                 price: price.value,
                 discount: discount.value,
@@ -174,7 +158,7 @@ const ProductForm = ({categories}: Props) => {
         }else {
             notify("error", `Fill in all required fields`);
         }  
-      };
+    };
 
 
 
@@ -248,7 +232,7 @@ const ProductForm = ({categories}: Props) => {
                             </select>
                         </div>
 
-                        <div className="my-3">
+                        {/* <div className="my-3">
                             <label htmlFor="sku" className="text-[#BFBFBF] text-sm block">
                                 Product SKU*
                             </label>
@@ -280,7 +264,7 @@ const ProductForm = ({categories}: Props) => {
                                     make.error ? "border-red-500" : "border-[#BFBFBF]"
                                 } rounded-md px-4 py-2 w-full`}
                             />
-                        </div>
+                        </div> */}
                         <div className="my-3">
                             <label htmlFor="price" className="text-[#BFBFBF] text-sm block">
                                 Price*

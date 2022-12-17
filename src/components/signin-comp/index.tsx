@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { AxiosResponse } from 'axios';
 
 // stylesheet
@@ -11,11 +10,9 @@ import logo from "../../assets/images/logo-orange.png";
 
 import { setItem } from "../../utils";
 import { ApiResponse } from "../../model";
+import { USER_LOGIN } from "../../services";
 
 const SignInComp = () => {
-  // const url: any = "https://generate-api.onrender.com/api";
-  const url: string = "https://generate-api.onrender.com/api";
-  // const url: string = "http://localhost:3000/api";
 
   // local States
   const [loading, setLoading] = useState<boolean>(false);
@@ -57,9 +54,7 @@ const SignInComp = () => {
     if (inputCheck()) {
       setLoading(true);
       const data = { email: email.value, password: password.value };
-      // axios.defaults.withCredentials = true;
-      axios
-        .post(`${url}/users/login`, data)
+      USER_LOGIN(data)
         .then((res: AxiosResponse<ApiResponse>) => {
           setLoading(false);
           const { message, payload } = res.data;
@@ -137,10 +132,11 @@ const SignInComp = () => {
 
               <div className="my-3 flex justify-between">
                 <div>
-                  <input type="checkBox" className="shadow-sm border-0" />
-                  <span className="text-[#BFBFBF] text-sm mx-3">
-                    Remember me?
-                  </span>
+                  <Link to="/crm-login">
+                    <span className="text-[#FF9363] text-sm mx-3">
+                      Sign in as admin
+                    </span>
+                  </Link>
                 </div>
                 <div>
                   <p className="text-[#FF9363]">

@@ -1,13 +1,23 @@
-import { getItem } from "../utils";
-import axios from "./config";
-// axios.defaults.withCredentials = true;
-
-const url = "https://generate-api.onrender.com/api";
-// const url: string = "http://localhost:3000/api";
-const token: string = getItem('clientToken');
+import axios, { url } from './config';
 
 export const RETRIEVE_USERS = async () => {
   return axios.get(`${url}/users`);
+};
+
+export const USER_LOGIN = async (data: any) => {
+  return axios.post(`${url}/users/login`, data);
+};
+
+export const USER_SIGNUP = async (data: any) => {
+  return axios.post(`${url}/users/register`, data);
+};
+
+export const USER_ACCOUNT_VERIFY = async (data: any) => {
+  return axios.post(`${url}/users/verify`, data);
+};
+
+export const ADMIN_LOGIN = async (data: any) => {
+  return axios.post(`${url}/admin/login`, data);
 };
 
 export const RETRIEVE_USER_BY_ID = async (id: string) => {

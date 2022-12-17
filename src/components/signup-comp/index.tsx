@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { AxiosResponse } from 'axios';
 
 // stylesheet
@@ -11,11 +10,9 @@ import logo from "../../assets/images/logo-orange.png";
 
 import { setItem } from "../../utils";
 import { ApiResponse } from "../../model";
+import { USER_SIGNUP } from "../../services";
 
 const SignupComp = () => {
-  // const url: any = "https://generate-api.onrender.com/api";
-  const url: string = "https://generate-api.onrender.com/api";
-//   const url: string = "http://localhost:3000/api";
 
   // local States
   const [loading, setLoading] = useState<boolean>(false);
@@ -102,9 +99,7 @@ const SignupComp = () => {
         password: password.value,
         country: country.value,
     }
-      // axios.defaults.withCredentials = true;
-      axios
-        .post(`${url}/users/register`, data)
+      USER_SIGNUP(data)
         .then((res: AxiosResponse<ApiResponse>) => {
           setLoading(false);
           const { message, payload } = res.data;
