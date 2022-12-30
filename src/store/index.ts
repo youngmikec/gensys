@@ -4,6 +4,7 @@ import categoriesReducer from './categories';
 import productsReducer from './products';
 import usersReducer from './users';
 import cryptosReducer from './cryptos';
+import giftcardsReducer from './giftcards';
 import ordersReducer from './orders';
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
         appModal: appModalReducer,
         productsState: productsReducer,
         categoriesState: categoriesReducer,
+        giftcardsState: giftcardsReducer,
         usersState: usersReducer,
         cryptosState: cryptosReducer,
         ordersState: ordersReducer,

@@ -1,0 +1,9 @@
+export enum GIFTCARD_STATUS {
+    ACTIVE = 'ACTIVE',
+    DEACTIVATED = 'DEACTIVATED'
+}
+
+export enum GIFTCARD_TYPE {
+    ECODE = 'ECODE',
+    PHYSICAL = 'PHYSICAL',
+}

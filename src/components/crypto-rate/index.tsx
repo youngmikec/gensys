@@ -9,9 +9,9 @@ const CryptoRate = () => {
     const [totalAmount, setTotalAmount] = useState<number>(0);
     const [currencyRate, setCurrencyRate] = useState<number>(0);
     const [crypto, setCrypto] = useState<string>('BTC');
-    const [selectedCrypto, setSelectedCrypto] = useState<CryptoCurrency | undefined>();
     const [cryptos, setCryptos] = useState<CryptoCurrency[]>([]);
     const [currencies, setCurrencies] = useState<{name: string, rate: number}[]>([]);
+    const [selectedCrypto, setSelectedCrypto] = useState<CryptoCurrency | undefined>();
 
     const calculateCryptoAmount = (qty: number) => {
         const rate = selectedCrypto?.rate

@@ -113,45 +113,45 @@ function AdminCategoriesComp() {
                     {/* calendar */}
                     <div className="group">
                         <div
-                        className="relative mx-1 px-1 py-2 group  mb-1 md:mb-0"
-                        id="button_pm"
+                            className="relative mx-1 px-1 py-2 group  mb-1 md:mb-0"
+                            id="button_pm"
                         >
                         {/* <span className="firstlevel hover:text-red-500 whitespace-no-wrap text-gray-600 hover:text-blue-800"
-                                            >
-                                                <BiEditAlt className="text-blue hover:cursor-pointer inline" />
-                                            </span> */}
-                        <div
-                            className="bg-[#494949] text-white py-0 lg:py-1 px-2 lg:px-3
-                            rounded-l-none rounded-r-3xl rounded-b-3xl hover:cursor-pointer inline-block"
                         >
-                            <span className="mx-2 inline text-sm">Sort by</span>
-                            <AiOutlineArrowUp className="text-white inline-block" />
-                        </div>
-                        <ul className=" absolute left-0 top-0 mt-10 p-2 rounded-lg shadow-lg bg-[#F6F6F6] z-0 hidden group-hover:block">
-                            <svg
-                            className="block fill-current text-[#F6F6F6] w-4 h-4 absolute left-0 top-0 ml-3 -mt-3 z-0"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
+                            <BiEditAlt className="text-blue hover:cursor-pointer inline" />
+                        </span> */}
+                            <div
+                                className="bg-[#494949] text-white py-0 lg:py-1 px-2 lg:px-3
+                                rounded-l-none rounded-r-3xl rounded-b-3xl hover:cursor-pointer inline-block"
                             >
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                            </svg>
-                            <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap hover:text-white rounded-md text-sm md:text-base ">
-                            <span
-                                className="items-left px-2 py-3"
-                                onClick={() => sortData("createdAt")}
-                            >
-                                By Date
-                            </span>
-                            </li>
-                            <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
-                            <span
-                                className="items-left px-2 py-2"
-                                onClick={() => sortData("name")}
-                            >
-                                Alphabetically
-                            </span>
-                            </li>
-                        </ul>
+                                <span className="mx-2 inline text-sm">Sort by</span>
+                                <AiOutlineArrowUp className="text-white inline-block" />
+                            </div>
+                            <ul className=" absolute left-0 top-0 mt-10 p-2 rounded-lg shadow-lg bg-[#F6F6F6] z-0 hidden group-hover:block">
+                                <svg
+                                className="block fill-current text-[#F6F6F6] w-4 h-4 absolute left-0 top-0 ml-3 -mt-3 z-0"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                >
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                </svg>
+                                <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap hover:text-white rounded-md text-sm md:text-base ">
+                                <span
+                                    className="items-left px-2 py-3"
+                                    onClick={() => sortData("createdAt")}
+                                >
+                                    By Date
+                                </span>
+                                </li>
+                                <li className="hover:bg-[#FF971D] hover:cursor-pointer pr-10 p-1 whitespace-no-wrap rounded-md hover:text-white text-sm md:text-base ">
+                                <span
+                                    className="items-left px-2 py-2"
+                                    onClick={() => sortData("name")}
+                                >
+                                    Alphabetically
+                                </span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     </div>

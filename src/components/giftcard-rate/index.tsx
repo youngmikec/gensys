@@ -1,19 +1,40 @@
-import React, { useState } from 'react';
-import { giftCards } from '../../constant';
+import React, { useState, useEffect } from 'react';
+import { AxiosResponse } from 'axios';
+
+import { ApiResponse, GCurrency, Giftcard } from '../../model';
+import { RETRIEVE_GIFTCARDS_PUBLIC } from '../../services';
 
 const GiftCardRate = () => {
-    const [giftcard, setGiftCard] = useState<string>('');
-    const [currencies, setCurrencies] = useState<any[]>([]);
     const [rate, setRate] = useState<number>(0);
     const [amount, setAmount] = useState<number>(0);
+    const [giftcards, setGiftcards] = useState<Giftcard[]>([]);
+    const [currencies, setCurrencies] = useState<GCurrency[]>([]);
+    const [selectedGiftcard, setSelectedGiftcard] = useState<Giftcard | undefined>();
 
-    const selectCurrencies = (name: string) => {
-        const returnedGiftcard = giftCards.find(item => item.name === name);
-        if(returnedGiftcard){
-            setCurrencies(returnedGiftcard.currencies);
-            console.log(currencies);
+    const retreiveGiftcards = () => {
+        RETRIEVE_GIFTCARDS_PUBLIC()
+        .then((res: AxiosResponse<ApiResponse>) => {
+            const { message, payload } = res.data;
+            setGiftcards(payload);
+            console.log(message);
+        })
+        .catch((err: any) => {
+            const { message } = err.response.data;
+            console.log(message);
+        });
+    };
+
+    const handleSelectGiftcard = (id: string) => {
+        const giftcard = giftcards.find((item: Giftcard) => item.id === id)
+        if(giftcard){
+            setSelectedGiftcard(giftcard);
+            setCurrencies(giftcard.currencies);
         }
     }
+
+    useEffect(() => {
+        retreiveGiftcards();
+    }, [])
 
     return (
         <>
@@ -27,17 +48,17 @@ const GiftCardRate = () => {
                                 id="giftcard" 
                                 name="giftcard"
                                 onChange={(e) => {
-                                    setGiftCard(e.target.value)
-                                    selectCurrencies(giftcard)
+                                    handleSelectGiftcard(e.target.value)
                                 }} 
                                 className="w-full my-4 rounded-lg bg-white text-black py-2 px-4"
                             >
+                                <option value="">Select Giftcard</option>
                                 {
-                                    giftCards.length > 0 &&
-                                    giftCards.map((item, key) => {
+                                    giftcards.length > 0 &&
+                                    giftcards.map((item: Giftcard, key: number) => {
                                         return <option 
                                         key={key} 
-                                        value={item.name}
+                                        value={item.id}
                                         >{ item.name }</option>
                                     })
                                 }
@@ -54,9 +75,10 @@ const GiftCardRate = () => {
                                 }}
                                 className="w-full my-4 rounded-lg bg-white text-black py-2 px-4"
                             >
+                                <option value="">Select currency</option>
                                 {
                                     currencies.length > 0 &&
-                                    currencies.map((item, key) => {
+                                    currencies.map((item: GCurrency, key: number) => {
                                         return <option key={key} value={item.rate}>{item.name}</option>
                                     })
                                 }
@@ -66,7 +88,7 @@ const GiftCardRate = () => {
                         
                         <div className='px-1'>
                             <p className='text-sm font-bold'>Card Type</p>
-                            <input type="text" defaultValue="Physical card" readOnly className="my-4 w-full rounded-lg bg-white text-black py-2 px-4" />
+                            <input type="text" value={selectedGiftcard?.type} readOnly className="my-4 w-full rounded-lg bg-white text-black py-2 px-4" />
                         </div>
 
                         <div className='px-1'>
@@ -84,10 +106,10 @@ const GiftCardRate = () => {
                     </div>
 
                     <div className="my-5">
-                        Rate NGN { rate }/USD
+                        Rate NGN { !Number.isNaN(rate)  ? rate : 0 }/USD
                         <div className="flex justify-between">
                             <h3 className='text-xl font-bold'>Total</h3>
-                            <h3 className='text-xl font-bold'>{ amount ? (rate * amount) : 0 }</h3>
+                            <h3 className='text-xl font-bold'>{ !Number.isNaN(rate * amount) ? (rate * amount) : 0 }</h3>
                         </div>
                     </div>
                 </div> 
