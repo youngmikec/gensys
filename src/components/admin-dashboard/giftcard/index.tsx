@@ -12,20 +12,20 @@ import { AiOutlineArrowUp, AiOutlinePlus } from 'react-icons/ai';
 import defaultImage from '../../../assets/images/pic.jpg';
 
 import Card from '../../../shared/card';
+import { sortArray } from '../../../utils';
 import { ApiResponse, CryptoCurrency } from '../../../model';
 import { DELETE_CRYPTO, RETRIEVE_CRYPTOS } from '../../../services';
-import { sortArray } from '../../../utils';
 import { INITIALIZE_PRODUCTS } from '../../../store/products';
 import AppModalComp from '../../../shared/app-modal';
 import { CloseAppModal, OpenAppModal } from '../../../store/modal';
 import { RootState } from '../../../store';
-import CryptoForm from './crypto-form';
-import CryptoUpdateForm from './crypto-update-form';
 import DeleteComp from '../delete-comp/delete-comp';
 import { REMOVE_CRYPTO } from '../../../store/cryptos';
+import GiftcardForm from './giftcard-form';
+import GiftcardUpdateForm from './giftcard-update-form';
 
 
-function AdminCryptoComp() {
+function AdminGiftcardComp() {
     const dispatch = useDispatch();
     const cryptoCurrencies: CryptoCurrency[] = useSelector((state: RootState) => state.cryptosState.value);
 
@@ -110,7 +110,7 @@ function AdminCryptoComp() {
                 {/* Card Title */}
                 <div className="flex justify-between mb-4">
                     <div>
-                        <h3 className="text-2xl font-medium">Cryptocurrencies</h3>
+                        <h3 className="text-2xl font-medium">Giftcards</h3>
                     </div>
 
                     
@@ -170,7 +170,7 @@ function AdminCryptoComp() {
                             '
                         >
                             <AiOutlinePlus className="inline mx-2 text-lg" />
-                            Create Crypto
+                            Create giftcard
                         </button>
                     </div>
                     <div></div>
@@ -283,13 +283,13 @@ function AdminCryptoComp() {
 
         <AppModalComp title=''>
             {
-                modalMode === 'create' && <CryptoForm />
+                modalMode === 'create' && <GiftcardForm />
             }
             {
                 modalMode === 'view' && <div>welcome to view product modal</div>
             }
             {
-                modalMode === 'update' && <CryptoUpdateForm crypto={selectedCrypto}  />
+                modalMode === 'update' && <GiftcardUpdateForm crypto={selectedCrypto}  />
             }
             {
                 modalMode === 'delete' && <DeleteComp id={selectedCrypto?.id} action={handleDeleteRecord} deleting={deleting} />
@@ -301,4 +301,4 @@ function AdminCryptoComp() {
     )
 }
 
-export default AdminCryptoComp;
+export default AdminGiftcardComp;

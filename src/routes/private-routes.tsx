@@ -11,6 +11,7 @@ import AdminProductsPage from "../pages/admin/products";
 import UserDetailPage from "../pages/admin/user-detail";
 import AdminOrdersPage from "../pages/admin/orders-page";
 import AdminProductDetail from "../pages/admin/product-detail";
+import AdminGiftcardsPage from "../pages/admin/giftcard";
 
 
 export const privateRoutes: RouteType[] = [
@@ -25,6 +26,10 @@ export const privateRoutes: RouteType[] = [
     {
         path: '/cryptos',
         component: <AdminCryptosPage />
+    },
+    {
+        path: '/giftcards',
+        component: <AdminGiftcardsPage />
     },
     {
         path: '/orders',

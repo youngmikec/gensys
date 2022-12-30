@@ -6,6 +6,7 @@ import { FiUsers } from 'react-icons/fi';
 import { BsBoxSeam } from 'react-icons/bs';
 import { BiCategoryAlt } from 'react-icons/bi';
 import { RiDashboardFill } from 'react-icons/ri';
+import { MdCardGiftcard } from 'react-icons/md';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import logo from '../../assets/images/logo-orange.png';
 
@@ -77,6 +78,15 @@ const Sidebar = ({sidebarMenus}: Props) => {
                         <Link to="/cryptos" className="inline-flex">
                             <FaBtc />
                             <span className="inline-flex mx-2">Cryptocurrency</span>
+                        </Link>
+                    </li>
+                    <li 
+                        title="Giftcard"
+                        className={ `my-6 py-3 px-4 text-left rounded-lg ${location.pathname === "/giftcards" ? "bg-[#FF9363] text-white" : "bg-[#f1f1f1] text-[#757575]"}`}  
+                    >
+                        <Link to="/giftcards" className="inline-flex">
+                            <MdCardGiftcard />
+                            <span className="inline-flex mx-2">Giftcards</span>
                         </Link>
                     </li>
                     <li 
