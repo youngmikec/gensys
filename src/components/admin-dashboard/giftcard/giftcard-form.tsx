@@ -4,9 +4,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from 'react-redux';
 import { AxiosResponse } from 'axios';
 
-import { ApiResponse } from '../../../model';
+import { ApiResponse, GCurrency } from '../../../model';
 import { CREATE_GIFTCARD } from '../../../services';
 import { ADD_TO_GIFTCARDS } from '../../../store/giftcards';
+import CurrencyAddComp from '../../currencyAddComp';
 
 
 const GiftcardForm = () => {
@@ -16,8 +17,8 @@ const GiftcardForm = () => {
     const [name, setName] = useState<{value: string, error: boolean }>({value: '', error: false});
     const [rate, setRate] = useState<{value: number, error: boolean }>({value: 0, error: false});
     const [type, setType] = useState<{value: string, error: boolean }>({value: 'PHYSICAL', error: false});
-    const [currencies, setCurrencies] = useState<{value: any[], error: boolean }>({value: [], error: false});
 
+    const [currencies, setCurrencies] = useState<{value: any[], error: boolean }>({value: [], error: false}); 
     
     const notify = (type: string, msg: string): void => {
         if (type === "success") {
@@ -87,6 +88,15 @@ const GiftcardForm = () => {
         }  
     };
 
+    const handleAddCurrency = ( data: any ) => {
+        setCurrencies({value: [data, ...currencies.value], error: false});
+    }
+
+    const removeCurrency = (name: string) => {
+        const filteredArray = currencies.value.filter((item: GCurrency) => item.name !== name);
+        setCurrencies({value: [...filteredArray], error: false});
+    }
+
     return (
         <>
             <div>
@@ -145,64 +155,11 @@ const GiftcardForm = () => {
                         </select>
                     </div>
 
-                    <div className="mb-3">
-                        <label htmlFor="cryptoImage" className="text-[#BFBFBF] text-sm block">
-                            Currencies
-                        </label>
-                        <div
-                            className='
-                                border-2 rounded-md my-3 h-60 w-full
-                                flex justify-center border-[#BFBFBF]
-                                px-1 py-2
-                            '
-                        >
-                            <div className='flex justify-between'>
-                                <div>
-                                    <div className="my-1 mx-2">
-                                        <label htmlFor="name" className="text-[#BFBFBF] text-sm block">
-                                            Currency Name*
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            value={name.value}
-                                            onChange={(e) =>
-                                                setName({ ...name, value: e.target.value })
-                                            }
-                                            className={`bg-white text-[#6A6A6A] border-2 ${
-                                                name.error ? "border-red-500" : "border-[#BFBFBF]"
-                                            } rounded-md px-4 py-2 w-full`}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div className="my-1 mx-2">
-                                        <label htmlFor="rate" className="text-[#BFBFBF] text-sm block">
-                                            Currency Rate In NGN per USD*
-                                        </label>
-                                        <input
-                                            type="number"
-                                            name="rate"
-                                            min={1000}
-                                            value={rate.value}
-                                            onChange={(e) =>
-                                                setRate({ ...rate, value: parseInt(e.target.value) })
-                                            }
-                                            className={`bg-white text-[#6A6A6A] border-2 ${
-                                                rate.error ? "border-red-500" : "border-[#BFBFBF]"
-                                            } rounded-md px-4 py-2 w-full`}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="my-1 mx-2">
-                                    <button className="bg-[#] text-white py-1 px-5 rounded-2xl">Add</button>
-                                </div>
-                            </div>
-                            add currencies
-                        </div>
-                    </div>
+                    <CurrencyAddComp 
+                        currencies={currencies.value}
+                        addFunc={handleAddCurrency}
+                        removeFunc={removeCurrency}
+                    />
 
 
                     <div className="my-3 text-center">
