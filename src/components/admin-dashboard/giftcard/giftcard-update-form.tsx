@@ -63,7 +63,7 @@ const GiftcardUpdateForm = ({ giftcard }: Props) => {
         setCurrencies({value: [], error: false})
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = () => {    
         if (inputCheck()) {
             setLoading(true);
             const data = { 
