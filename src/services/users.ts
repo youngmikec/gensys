@@ -16,6 +16,10 @@ export const USER_ACCOUNT_VERIFY = async (data: any) => {
   return axios.post(`${url}/users/verify`, data);
 };
 
+export const VERIFY_ACCOUNT = async (data: any) => {
+  return axios.post(`${url}/users/verify`, data);
+};
+
 export const ADMIN_LOGIN = async (data: any) => {
   return axios.post(`${url}/admin/login`, data);
 };

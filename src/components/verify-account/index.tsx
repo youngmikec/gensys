@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useParams } from "react-router-dom";
 import { AxiosResponse } from 'axios';
 
 import "./style.css";
@@ -11,10 +12,12 @@ import { ApiResponse } from "../../model";
 import { USER_ACCOUNT_VERIFY } from "../../services";
 
 const VerifyAccountComp = () => {
+    const params = useParams();
+    const { code } = params;
 
     // local States
     const [loading, setLoading] = useState<boolean>(false);
-    const [code, setCode] = useState<{ value: string; error: boolean }>({value: "", error: false});
+    // const [code, setCode] = useState<{ value: string; error: boolean }>({value: "", error: false});
 
     const notify = (type: string, msg: string) => {
         if (type === "success") {
@@ -30,40 +33,61 @@ const VerifyAccountComp = () => {
         }
     };
 
-  const inputCheck = (): boolean => {
-    let isValid: boolean = true;
-    if (code.value === "" || undefined || null) {
-      isValid = false;
-      setCode({ ...code, error: true });
-    } else {
-      setCode({ ...code, error: false });
-    }
+//   const inputCheck = (): boolean => {
+//     let isValid: boolean = true;
+//     if (code.value === "" || undefined || null) {
+//       isValid = false;
+//       setCode({ ...code, error: true });
+//     } else {
+//       setCode({ ...code, error: false });
+//     }
     
-    return isValid;
-  };
+//     return isValid;
+//   };
 
-  const handleLogin = () => {
-    if (inputCheck()) {
-      setLoading(true);
-      const userId: string = getItem('clientID');
+//   const handleLogin = () => {
+//     if (inputCheck()) {
+//       setLoading(true);
+//       const userId: string = getItem('clientID');
       
-      if(userId === '' || null || undefined) return notify('error', 'No user found pls Signup');
-      const data = { code: code.value, id:  userId};
+//       if(userId === '' || null || undefined) return notify('error', 'No user found pls Signup');
+//       const data = { code: code.value, id:  userId};
 
-      USER_ACCOUNT_VERIFY(data)
-        .then((res: AxiosResponse<ApiResponse>) => {
-          setLoading(false);
-          const { message } = res.data;
-          notify("success", message);
-          window.location.href = "/sign-in";
-        })
-        .catch((err: any) => {
-          const { message } = err.response.data;
-          setLoading(false);
-          notify("error", message);
-        });
+//       USER_ACCOUNT_VERIFY(data)
+//         .then((res: AxiosResponse<ApiResponse>) => {
+//           setLoading(false);
+//           const { message } = res.data;
+//           notify("success", message);
+//           window.location.href = "/sign-in";
+//         })
+//         .catch((err: any) => {
+//           const { message } = err.response.data;
+//           setLoading(false);
+//           notify("error", message);
+//         });
+//     }
+//   };
+
+    const handleEmailVerification = () => {
+        setLoading(true);
+        const data = { code };
+        USER_ACCOUNT_VERIFY(data)
+            .then((res: AxiosResponse<ApiResponse>) => {
+            setLoading(false);
+            const { message } = res.data;
+            notify("success", message);
+            window.location.href = "/sign-in";
+            })
+            .catch((err: any) => {
+            const { message } = err.response.data;
+            setLoading(false);
+            notify("error", message);
+            });
     }
-  };
+
+    useEffect(() => {
+        handleEmailVerification()
+    }, [])
 
     return (
         <>
@@ -86,33 +110,7 @@ const VerifyAccountComp = () => {
                     </div>
 
                     {/** Form Section */}
-                    <div id="form" className="mx-">
-                        <div className="my-3">
-                            <label htmlFor="code" className="text-[#BFBFBF] text-sm block">
-                                Verification Code*
-                            </label>
-                            <input
-                                type="text"
-                                name="code"
-                                value={code.value}
-                                onChange={(e) =>
-                                    setCode({ ...code, value: e.target.value })
-                                }
-                                className={`bg-white text-[#6A6A6A] border-2 ${
-                                    code.error ? "border-red-500" : "border-[#BFBFBF]"
-                                } rounded-md px-4 py-2 w-full`}
-                            />
-                        </div>
-
-                        <div className="my-3 text-center">
-                            <button
-                            onClick={() => handleLogin()}
-                            className="bg-[#FF9363] text-white py-1 px-10 rounded-2xl"
-                            >
-                                {loading ? "Loading..." : "Verify"}
-                            </button>
-                        </div>
-                    </div>
+                    
                     {/** Form Section */}
 
                     

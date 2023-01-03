@@ -53,7 +53,7 @@ export const publicRoutes: RouteType[] = [
         component: <Signup /> 
     },
     {
-        path: '/verify',
+        path: '/email-verify/:code',
         component: <VerificatioinPage /> 
     },
     {

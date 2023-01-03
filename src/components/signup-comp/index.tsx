@@ -103,10 +103,9 @@ const SignupComp = () => {
         .then((res: AxiosResponse<ApiResponse>) => {
           setLoading(false);
           const { message, payload } = res.data;
-          notify("success", message);
           setItem("clientID", payload.id);
           setItem("clientD", payload);
-          window.location.href = "/verify";
+          notify("success", `${message} Check your email to verify your account.`);
         })
         .catch((err: any) => {
           const { message } = err.response.data;
