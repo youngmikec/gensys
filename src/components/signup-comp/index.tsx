@@ -88,6 +88,16 @@ const SignupComp = () => {
     return isValid;
   };
 
+  const clearStates = () => {
+    setFirstName({value: '', error: false});
+    setLastName({value: '', error: false});
+    setEmail({value: '', error: false});
+    setPhone({value: '', error: false});
+    setCountry({value: '', error: false});
+    setPassword({value: '', error: false});
+    setConfirmPassword({value: '', error: false});
+  }
+
   const handleLogin = () => {
     if (inputCheck()) {
       setLoading(true);
@@ -105,6 +115,7 @@ const SignupComp = () => {
           const { message, payload } = res.data;
           setItem("clientID", payload.id);
           setItem("clientD", payload);
+          clearStates();
           notify("success", `${message} Check your email to verify your account.`);
         })
         .catch((err: any) => {
@@ -296,9 +307,9 @@ return (
 
                 <div className="mt-5 text-center text-sm">
                     <p className="text-[#BFBFBF]">
-                        Don’t have an account?{" "}
-                        <Link to="/sign-up" className="text-[#FF9363]">
-                        Click here to sign up.
+                        Already have an account?{" "}
+                        <Link to="/sign-in" className="text-[#FF9363]">
+                        Click here to sign in.
                         </Link>
                     </p>
                 </div>

@@ -4,10 +4,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import { AxiosResponse } from 'axios';
 
+import { MdOutlineCancel } from "react-icons/md";
+import { FaCheckCircle } from "react-icons/fa";
+
 import "./style.css";
 import logo from "../../assets/images/logo-orange.png";
 
-import { getItem } from "../../utils";
 import { ApiResponse } from "../../model";
 import { USER_ACCOUNT_VERIFY } from "../../services";
 
@@ -17,7 +19,8 @@ const VerifyAccountComp = () => {
 
     // local States
     const [loading, setLoading] = useState<boolean>(false);
-    // const [code, setCode] = useState<{ value: string; error: boolean }>({value: "", error: false});
+    const [isVerified, setIsVerified] = useState<boolean>(false);
+    const [responseMsg, setResponseMsg] = useState<string>('');
 
     const notify = (type: string, msg: string) => {
         if (type === "success") {
@@ -33,41 +36,6 @@ const VerifyAccountComp = () => {
         }
     };
 
-//   const inputCheck = (): boolean => {
-//     let isValid: boolean = true;
-//     if (code.value === "" || undefined || null) {
-//       isValid = false;
-//       setCode({ ...code, error: true });
-//     } else {
-//       setCode({ ...code, error: false });
-//     }
-    
-//     return isValid;
-//   };
-
-//   const handleLogin = () => {
-//     if (inputCheck()) {
-//       setLoading(true);
-//       const userId: string = getItem('clientID');
-      
-//       if(userId === '' || null || undefined) return notify('error', 'No user found pls Signup');
-//       const data = { code: code.value, id:  userId};
-
-//       USER_ACCOUNT_VERIFY(data)
-//         .then((res: AxiosResponse<ApiResponse>) => {
-//           setLoading(false);
-//           const { message } = res.data;
-//           notify("success", message);
-//           window.location.href = "/sign-in";
-//         })
-//         .catch((err: any) => {
-//           const { message } = err.response.data;
-//           setLoading(false);
-//           notify("error", message);
-//         });
-//     }
-//   };
-
     const handleEmailVerification = () => {
         setLoading(true);
         const data = { code };
@@ -75,14 +43,16 @@ const VerifyAccountComp = () => {
             .then((res: AxiosResponse<ApiResponse>) => {
             setLoading(false);
             const { message } = res.data;
-            notify("success", message);
-            window.location.href = "/sign-in";
-            })
-            .catch((err: any) => {
+            setIsVerified(true);
+            setResponseMsg(message);
+        })
+        .catch((err: any) => {
             const { message } = err.response.data;
             setLoading(false);
+            setIsVerified(false);
+            setResponseMsg(message);
             notify("error", message);
-            });
+        });
     }
 
     useEffect(() => {
@@ -101,17 +71,39 @@ const VerifyAccountComp = () => {
 
                     <div className="bg-white w-full rounded-2xl shadow-lg py-16 px-10">
                         <div className="">
-                        <h4 className="text-[#6A6A6A] text-xl font-bold text-center">
-                            Verify Account
-                        </h4>
-                        <p className="text-[#BFBFBF] text-sm my-3 text-center">
-                            Enter the code sent to your email address
-                        </p>
-                    </div>
 
-                    {/** Form Section */}
-                    
-                    {/** Form Section */}
+                        {
+                            (!loading && isVerified) &&
+                            <div className="w-full text-center mx-auto">
+                                <span className="mt-3 mb-8">
+                                    <FaCheckCircle className="text-center mx-auto text-6xl text-green-500" />
+                                </span>
+                                <h4 className="text-[#6A6A6A] text-xl font-bold text-center">
+                                    { responseMsg }
+                                </h4>
+
+                            </div>
+                        }
+
+                        {
+                            (!loading && !isVerified) &&
+                            <div className="w-full text-center mx-auto">
+                                <span className="mt-3 mb-8 text-center">
+                                    <MdOutlineCancel className="text-center mx-auto text-6xl text-red-500" />
+                                </span>
+                                <h4 className="text-[#6A6A6A] text-xl font-bold text-center">
+                                    { responseMsg }
+                                </h4>
+                            </div>
+                        }
+
+                        {
+                            loading && 
+                            <p className="text-[#6A6A6A] text-sm my-3 text-center">
+                                Verifying your account ...
+                            </p>
+                        }
+                    </div>
 
                     
                     </div>
