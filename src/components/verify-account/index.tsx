@@ -45,6 +45,9 @@ const VerifyAccountComp = () => {
             const { message } = res.data;
             setIsVerified(true);
             setResponseMsg(message);
+            setTimeout(() => {
+                window.location.href = '/'
+            }, 3000)
         })
         .catch((err: any) => {
             const { message } = err.response.data;
