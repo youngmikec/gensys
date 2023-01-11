@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AiOutlineInstagram } from 'react-icons/ai';
-import { FaFacebookF } from 'react-icons/fa';
+
 import { BsTwitter } from 'react-icons/bs';
+import { FaFacebookF } from 'react-icons/fa';
+import { AiOutlineInstagram } from 'react-icons/ai';
 
 import logo from '../../assets/images/logo-redesign.jpeg';
 
@@ -18,7 +19,9 @@ const Footer = () => {
                 >
                     <div>
                         <div className='mb-0'>
-                            <img src={logo} alt="logo" />
+                            <Link to='/'>
+                                <img src={logo} alt="logo" />
+                            </Link>
                         </div>
     
                         <div>

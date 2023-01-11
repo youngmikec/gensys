@@ -12,9 +12,12 @@ const ProductsLayout = ({ children, categories }: Props) => {
   return (
     <>
         <div className='mx-auto w-11/12 my-4'>
-            <div className='flex justify-between'>
-                <div className='w-2/12 mx-4'>
-                    <Card type='sm' title='Cateogries'>
+            <div className='flex flex-col lg:flex-row'>
+                <div className='w-full my-3 lg:my-0 lg:w-2/12 mx-4'>
+                    <Card type='sm'>
+                        <div>
+                            <h3 className='text-sm'>Cateogries</h3>
+                        </div>
                         <ul className='my-4'>
                             {
                                 categories && categories.length > 0 &&

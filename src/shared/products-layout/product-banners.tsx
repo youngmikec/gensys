@@ -5,13 +5,14 @@ import { IoIosFlash } from 'react-icons/io';
 import { FaRegCreditCard } from 'react-icons/fa';
 import { AiOutlineSafetyCertificate } from 'react-icons/ai';
 
+//banner images
+import bigBanner from '../../assets/images/ppe1.jpg';
+import blakFriday from '../../assets/images/products.png';
+import blakFriday2 from '../../assets/images/products.png';
 
 import Card from '../card';
 
 function ProductBanners() {
-    const bigBanner: string = 'https://media.istockphoto.com/vectors/black-friday-super-sale-on-all-products-with-floating-shopping-cart-vector-id1279180355?k=20&m=1279180355&s=612x612&w=0&h=Z6gNRho9LU1TsYdOoO23T4LHUp6U03c-yb0OtOodXcc=';
-    const blakFriday: string = 'https://image.shutterstock.com/image-illustration/black-friday-sale-poster-shopping-260nw-752443399.jpg';
-    const blakFriday2: string = 'https://img.freepik.com/premium-psd/front-view-black-friday-concept-mock-up_23-2148710570.jpg?w=2000';
 
   return (
     <>
@@ -36,8 +37,8 @@ function ProductBanners() {
                 </div>
             </div>
 
-            <div className="flex justify-between my-4">
-                <div className='mx-1'>
+            <div className="flex flex-col md:flex-row lg:flex-row my-4">
+                <div className='mx-1 my-1'>
                     <Card type='sm'>
                         <div className="flex justify-start">
                             <div className="mx-1 pt-1">
@@ -50,7 +51,8 @@ function ProductBanners() {
                         </div>
                     </Card>
                 </div>
-                <div className='mx-1'>
+
+                <div className='mx-1 my-1'>
                     <Card type='sm'>
                         <div className="flex justify-start">
                             <div className="mx-1 pt-1">
@@ -63,7 +65,8 @@ function ProductBanners() {
                         </div>
                     </Card>
                 </div>
-                <div className='mx-1'>
+
+                <div className='mx-1 my-1'>
                     <Card type='sm'>
                         <div className="flex justify-start">
                             <div className="mx-1 pt-1">
@@ -76,7 +79,8 @@ function ProductBanners() {
                         </div>
                     </Card>
                 </div>
-                <div className='mx-1'>
+
+                <div className='mx-1 my-1'>
                     <Card type='sm'>
                         <div className="flex justify-start">
                             <div className="mx-1 pt-1">

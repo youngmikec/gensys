@@ -132,7 +132,9 @@ return (
         <div className="mx-auto w-11/12 sm:w-9/12 md:w-7/12 lg:w-[55%] h-max">
             <div className="flex justify-center mb-4">
                 <div className="">
-                <img src={logo} width="100px" height="100px" alt="barcode" />
+                    <Link to="/">
+                        <img src={logo} width="100px" height="100px" alt="barcode" />
+                    </Link>
                 </div>
             </div>
 
