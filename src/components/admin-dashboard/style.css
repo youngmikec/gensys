@@ -1,5 +1,5 @@
 .wrapper {
-    background-image: url('../../assets/images/ppe1.jpg');
+    background-image: url('../../assets/images//new/sign-in.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -9,7 +9,7 @@
 
 @media screen and (max-width: 770px) {
     .wrapper{
-        background-image: url('../../assets/images/ppe1.jpg');
+        background-image: url('../../assets/images/new/sign-in.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;

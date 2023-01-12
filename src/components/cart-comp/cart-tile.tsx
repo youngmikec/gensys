@@ -31,10 +31,10 @@ function CartTile({ productItem }: Props) {
                 </div>
 
                 <div>
-                    <div className="text-right">
-                        <h3 className='mb-4 text-xl font-semibold'><TbCurrencyNaira className='inline' />{product.price}</h3>
-                        <span className='mx-2 line-through text-[#8c8c8c]'><TbCurrencyNaira className='inline' />12,000</span>
-                        <span className='bg-[#ff926350] text-[#FF9363] py-1 px-3 rounded-md'>-{product.discount}%</span>
+                    <div className="md:text-right lg:text-right my-2 md:my-0 lg:my-0">
+                        <h3 className='mb-4 text-lg md:text-xl lg:text-xl font-semibold'><TbCurrencyNaira className='inline' />{product.price}</h3>
+                        <p className='mx-2 line-through text-[#8c8c8c]'><TbCurrencyNaira className='inline' />12,000</p>
+                        <p className='bg-[#ff926350] text-[#FF9363] py-1 px-3 rounded-md'>-{product.discount}%</p>
                     </div>
                 </div>
             </div>
@@ -48,20 +48,6 @@ function CartTile({ productItem }: Props) {
                             <div className='mx-4'>
                                 <button className="text-[#FF9363] text-lg">Remove</button>
                             </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div className='my-4 flex justify-between'>
-                        <div className=''>
-                            <button className="bg-[#FF9363] text-white rounded-[0.25rem] px-2 py-1">-</button>
-                        </div>
-                        <div className='mx-4'>
-                            <button className="border-[1px] border-[#c4c4c4] rounded-[0.25rem] px-2 py-1">{productItem.qty}</button>
-                        </div>
-                        <div>
-                            <button className="bg-[#FF9363] text-white rounded-[0.25rem] px-2 py-1">+</button>
-                        </div>
                     </div>
                 </div>
             </div>

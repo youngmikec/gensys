@@ -8,7 +8,7 @@ import { AiOutlineSafetyCertificate } from 'react-icons/ai';
 //banner images
 import bigBanner from '../../assets/images/ppe1.jpg';
 import blakFriday from '../../assets/images/products.png';
-import blakFriday2 from '../../assets/images/products.png';
+import blakFriday2 from '../../assets/images/18.png';
 
 import Card from '../card';
 

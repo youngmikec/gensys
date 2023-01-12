@@ -57,9 +57,9 @@ const Navbar = ({bg, text}: Props) => {
                                   leading-tight
                                   uppercase
                                   rounded
-                                  hover:bg-white hover:shadow-lg hover:text-[#8652A4]
-                                  focus:bg-white focus:text-[#8652A4] focus:shadow-lg focus:outline-none focus:ring-0
-                                  active:bg-white active:shadow-lg active:text-[#8652A4]
+                                  hover:bg-white hover:shadow-lg hover:text-black
+                                  focus:bg-white focus:text-black focus:shadow-lg focus:outline-none focus:ring-0
+                                  active:bg-white active:shadow-lg active:text-black
                                   transition
                                   duration-150
                                   ease-in-out
@@ -111,13 +111,12 @@ const Navbar = ({bg, text}: Props) => {
                                       w-full
                                       whitespace-nowrap
                                       bg-transparent
-                                      text-[#8652A4]
+                                      text-black
                                       hover:bg-gray-100
                                       "
                                       href='/'
                                       >Home</a>
                                   </li>
-                                  <li className='mx-4 text-white font-semibold hover:border-b-2 hover:border-b-white'><Link to="/">Home</Link></li>
                                   
                                   <li>
                                       <a
@@ -131,11 +130,11 @@ const Navbar = ({bg, text}: Props) => {
                                       w-full
                                       whitespace-nowrap
                                       bg-transparent
-                                      text-[#8652A4]
+                                      text-black
                                       hover:bg-gray-100
                                       "
-                                      href="/about-us"
-                                      >About us</a>
+                                      href="/services"
+                                      >Services</a>
                                   </li>
                                   <li>
                                       <a
@@ -149,11 +148,11 @@ const Navbar = ({bg, text}: Props) => {
                                       w-full
                                       whitespace-nowrap
                                       bg-transparent
-                                      text-[#8652A4]
+                                      text-black
                                       hover:bg-gray-100
                                       "
-                                      href='/contact-us'
-                                      >Contact Us</a>
+                                      href='/rating'
+                                      >Rates</a>
                                   </li>
                                   <li>
                                       <a
@@ -167,11 +166,11 @@ const Navbar = ({bg, text}: Props) => {
                                       w-full
                                       whitespace-nowrap
                                       bg-transparent
-                                      text-[#8652A4]
+                                      text-black
                                       hover:bg-gray-100
                                       "
-                                      href='/faqs'
-                                      >FAQS</a>
+                                      href='/products'
+                                      >Products</a>
                                   </li>
                                   <li>
                                       <a
@@ -185,7 +184,7 @@ const Navbar = ({bg, text}: Props) => {
                                       w-full
                                       whitespace-nowrap
                                       bg-transparent
-                                      text-[#8652A4]
+                                      text-black
                                       hover:bg-gray-100
                                       "
                                       href='/sign-in'
@@ -203,7 +202,7 @@ const Navbar = ({bg, text}: Props) => {
                                       w-full
                                       whitespace-nowrap
                                       bg-transparent
-                                      text-[#8652A4]
+                                      text-black
                                       hover:bg-gray-100
                                       "
                                       href='/sign-up'

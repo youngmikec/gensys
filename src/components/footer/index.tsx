@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <>
         <div className='bg-black text-white w-full py-9 mb-0'>
-            <div className='w-8/12 mx-auto'>
+            <div className='w-11/12 md:w-8/12 lg:w-8/12 mx-auto'>
                 <div className="mx-auto grid grid-cols-1 
                     sm:grid-cols-2 
                     md:grid-cols-3 

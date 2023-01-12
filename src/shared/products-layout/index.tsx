@@ -11,9 +11,9 @@ type Props = {
 const ProductsLayout = ({ children, categories }: Props) => {
   return (
     <>
-        <div className='mx-auto w-11/12 my-4'>
+        <div className='mx-auto w-full lg:w-11/12 my-4'>
             <div className='flex flex-col lg:flex-row'>
-                <div className='w-full my-3 lg:my-0 lg:w-2/12 mx-4'>
+                <div className='w-11/12 mx-auto my-3 lg:my-0 lg:w-2/12 lg:mx-4'>
                     <Card type='sm'>
                         <div>
                             <h3 className='text-sm'>Cateogries</h3>

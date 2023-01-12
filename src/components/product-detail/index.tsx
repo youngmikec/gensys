@@ -118,8 +118,8 @@ const ProductDetailComp = () => {
     return (
         <>
             <div className='mx-auto w-10/12 my-4'>
-                <div className='flex justify-between'>
-                    <div className='w-9/12 mr-2'>
+                <div className='flex flex-col sm:flex-col md:flex-row lg:flex-row'>
+                    <div className='w-full md:w-8/12 lg:w-9/12 mr-2'>
                         <Card type='lg'>
                             <div className='flex justify-between'>
                                 <div className='w-6/12 mr-2'>
@@ -173,7 +173,7 @@ const ProductDetailComp = () => {
 
                         <div className='my-6'>
                             <Card type='lg' title='Product Details'>
-                                <div className='my-4'>
+                                <div className='my-4 w-full'>
                                     <p className='text-sm text-[#8c8c8c] text-justify'>
                                         { product?.description }
                                     </p>
@@ -186,7 +186,7 @@ const ProductDetailComp = () => {
                         </div>
                     </div>
 
-                    <div className='w-3/12 ml-2'>
+                    <div className='w-full md:w-4/12 lg:w-3/12 ml-2'>
                         <div className='my-4'>
                             <Card type='sm' title='Seller Information'>
                                 <div className="flex justify-start my-2">
@@ -203,6 +203,7 @@ const ProductDetailComp = () => {
                                 </div>
                             </Card>
                         </div>
+
                         <div className='my-4'>
                             <Card type='sm'>
                                 <div className="flex justify-start my-2">

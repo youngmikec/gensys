@@ -17,12 +17,12 @@ const ProductSection = ({ title, products }: Props) => {
                     <div>
                         <h4 className='font-semibold'>{ title }</h4>
                     </div>
-                    <div>
+                    {/* <div>
                         <h4 className='font-thin'>view more</h4>
-                    </div>
+                    </div> */}
                 </div>
 
-                <div id='body' className='p-4 grid grid-cols-4 space-x-2 h-max '>
+                <div id='body' className='p-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 space-x-2 h-max overflow-x-scroll'>
                     {
                         products.length > 0 &&
                         products.map((item: Product, idx: number) => {

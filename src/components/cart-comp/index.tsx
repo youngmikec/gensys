@@ -91,8 +91,8 @@ function CartComp() {
     return (
         <>
             <div className='mx-auto w-11/12 sm:w-10/12 lg:w-9/12 my-6'>
-                <div className="grid grid-cols-1 lg:flex lg:justify-between">
-                    <div className='w-full lg:w-10/12 mx-2'>
+                <div className="grid grid-cols-1 space-y-2 lg:space-y-0 lg:flex lg:justify-between">
+                    <div className='w-full lg:w-10/12 lg:mx-2 my-2 md:my-0 lg:my-0'>
                         <Card type='sm' title={`Cart (${cart?.products.length || 0})`}>
                             <hr />
                             {
@@ -110,7 +110,7 @@ function CartComp() {
                         </Card>
                     </div>
 
-                    <div className='w-full sm:w-10/12 md:w-8/12 lg:w-3/12 mx-2'>
+                    <div className='w-full lg:w-3/12 lg:mx-2 md:my-0 lg:my-0'>
                         <Card type='sm' title='Summary'>
                             <hr />
                             <div className='my-1 flex justify-between w-full'>
